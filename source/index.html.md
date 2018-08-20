@@ -721,6 +721,7 @@ let max = api.transactions.get(12345678);
     }
   }
 ]
+```
 
 This endpoint retrieves a specific trade.
 
