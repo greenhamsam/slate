@@ -648,8 +648,7 @@ Always list the group ID first, then the user ID.
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">[</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="err">//</span><span class="w"> </span><span class="err">A</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">buys</span><span class="w"> </span><span class="err">ETH</span><span class="w"> </span><span class="err">using</span><span class="w"> </span><span class="err">BTC</span><span class="w"> </span><span class="err">using</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">Lettuce</span><span class="w"> </span><span class="err">iOS</span><span class="w"> </span><span class="err">app</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="p">,</span><span class="w">
@@ -792,117 +791,41 @@ Always list the group ID first, then the user ID.
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="err">//</span><span class="w"> </span><span class="err">Inves</span><span class="w"> </span><span class="err">exchanges</span><span class="w"> </span><span class="err">BTC</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">IOTA</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">behalf</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">Binance</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"crypto for crypto"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Could</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">instructed</span><span class="p">,</span><span class="w"> </span><span class="err">quoted</span><span class="p">,</span><span class="w"> </span><span class="err">rejected</span><span class="p">,</span><span class="w"> </span><span class="err">failed</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chloe Coetzee"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"purchase"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"dateCreated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"dateProcessed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:44.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123423</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Links</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">suppliers</span><span class="w"> </span><span class="err">database</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Binance"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Automatic rebalance"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IOT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sold"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Binance BTC hotwallet"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.203920992</span><span class="p">,</span><span class="w">
       </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"bought"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IOTA vault"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.302992</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IOT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"fees"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0004</span><span class="p">,</span><span class="w">
       </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
     </span><span class="p">},</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Would</span><span class="w"> </span><span class="err">fees</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">just</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">built</span><span class="w"> </span><span class="err">into</span><span class="w"> </span><span class="err">our</span><span class="w"> </span><span class="err">quoted</span><span class="w"> </span><span class="err">price?</span><span class="w">
-    </span><span class="s2">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">If</span><span class="w"> </span><span class="err">there</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">related</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">Transaction</span><span class="p">,</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">links</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">Transactions</span><span class="w"> </span><span class="err">database</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="err">//</span><span class="w"> </span><span class="err">Inves</span><span class="w"> </span><span class="err">tops</span><span class="w"> </span><span class="err">up</span><span class="w"> </span><span class="err">our</span><span class="w"> </span><span class="err">BTC</span><span class="w"> </span><span class="err">float</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inter crypto transfer"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Could</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">instructed</span><span class="p">,</span><span class="w"> </span><span class="err">quoted</span><span class="p">,</span><span class="w"> </span><span class="err">rejected</span><span class="p">,</span><span class="w"> </span><span class="err">failed</span><span class="w">
-    </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float rules"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"dateCreated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"dateProcessed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:44.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"sold"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC vault"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.203920992</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"bought"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC hotwallet Binance"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.302992</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"fees"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0004</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"blockhainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e81b7ee809ac5319a54203c1740c686028bfa0612fa22a53c4e6c1f5e7c9e332"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="err">//</span><span class="w"> </span><span class="err">Inves</span><span class="w"> </span><span class="err">buys</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">Bitcoin</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">GBP</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fiat for crypto"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Could</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">instructed</span><span class="p">,</span><span class="w"> </span><span class="err">quoted</span><span class="p">,</span><span class="w"> </span><span class="err">rejected</span><span class="p">,</span><span class="w"> </span><span class="err">failed</span><span class="w">
-    </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123423</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Links</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">suppliers</span><span class="w"> </span><span class="err">database</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cumberland"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"dateCreated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"dateProcessed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:44.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"sold"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Revolut account"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">39292.32</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"bought"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC day to day"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.302992</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"trade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">If</span><span class="w"> </span><span class="err">there</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">related</span><span class="w"> </span><span class="err">Trade</span><span class="p">,</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">links</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">Trades</span><span class="w"> </span><span class="err">database</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific trade.</p>
+<p>This endpoint retrieves a specific transaction.</p>
 <h3 id='http-request-8'>HTTP Request</h3>
 <p><code>GET http://inves.technology/trades/&lt;ID&gt;</code></p>
 <h3 id='url-parameters-5'>URL Parameters</h3>
@@ -1028,8 +951,6 @@ Always list the group ID first, then the user ID.
     </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.23</span><span class="p">,</span><span class="w">
     </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.23</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Will</span><span class="w"> </span><span class="err">usually</span><span class="w"> </span><span class="err">equal</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">BTC</span><span class="w"> </span><span class="err">denominated</span><span class="w"> </span><span class="err">account</span><span class="w">
   </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h1 id='trades'>Trades</h1>
 <p>All of the inter-asset trades that Inves makes on our Supplier platforms. These change the real underlying assets in our value store accounts. Trades are also where we move money between different value store accounts. This database could also be called &quot;Inves Transactions&quot;.</p>
@@ -1052,28 +973,116 @@ Always list the group ID first, then the user ID.
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Inves</span><span class="w"> </span><span class="err">exchanges</span><span class="w"> </span><span class="err">BTC</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">IOTA</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">behalf</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">Binance</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH vault"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1BoatSLRHtKNngkdXEeobR76b53LETtpyT"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">203020202.23</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">23030302023.30</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Today's</span><span class="w"> </span><span class="err">BTC</span><span class="w"> </span><span class="err">value</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"crypto for crypto"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Could</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">instructed</span><span class="p">,</span><span class="w"> </span><span class="err">quoted</span><span class="p">,</span><span class="w"> </span><span class="err">rejected</span><span class="p">,</span><span class="w"> </span><span class="err">failed</span><span class="w">
+    </span><span class="s2">"dateCreated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dateProcessed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:44.511Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123423</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Links</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">suppliers</span><span class="w"> </span><span class="err">database</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Binance"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IOT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sold"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Binance BTC hotwallet"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.203920992</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"bought"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IOTA vault"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.302992</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IOT"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"fees"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0004</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Would</span><span class="w"> </span><span class="err">fees</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">just</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">built</span><span class="w"> </span><span class="err">into</span><span class="w"> </span><span class="err">our</span><span class="w"> </span><span class="err">quoted</span><span class="w"> </span><span class="err">price?</span><span class="w">
+    </span><span class="s2">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">If</span><span class="w"> </span><span class="err">there</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">related</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">Transaction</span><span class="p">,</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">links</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">Transactions</span><span class="w"> </span><span class="err">database</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Inves</span><span class="w"> </span><span class="err">tops</span><span class="w"> </span><span class="err">up</span><span class="w"> </span><span class="err">our</span><span class="w"> </span><span class="err">BTC</span><span class="w"> </span><span class="err">float</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345679</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Binance hotwallet"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1BoatSLRHtKNngkdXEeobR76b53LETtpyT"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.23</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.23</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Will</span><span class="w"> </span><span class="err">usually</span><span class="w"> </span><span class="err">equal</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">BTC</span><span class="w"> </span><span class="err">denominated</span><span class="w"> </span><span class="err">account</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inter crypto transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Could</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">instructed</span><span class="p">,</span><span class="w"> </span><span class="err">quoted</span><span class="p">,</span><span class="w"> </span><span class="err">rejected</span><span class="p">,</span><span class="w"> </span><span class="err">failed</span><span class="w">
+    </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float rules"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dateCreated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dateProcessed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:44.511Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sold"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC vault"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.203920992</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"bought"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC hotwallet Binance"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.302992</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"fees"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0004</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"blockhainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e81b7ee809ac5319a54203c1740c686028bfa0612fa22a53c4e6c1f5e7c9e332"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Inves</span><span class="w"> </span><span class="err">buys</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">Bitcoin</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">GBP</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239201</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fiat for crypto"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Could</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">instructed</span><span class="p">,</span><span class="w"> </span><span class="err">quoted</span><span class="p">,</span><span class="w"> </span><span class="err">rejected</span><span class="p">,</span><span class="w"> </span><span class="err">failed</span><span class="w">
+    </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123423</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Links</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">suppliers</span><span class="w"> </span><span class="err">database</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cumberland"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"dateCreated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dateProcessed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:44.511Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sold"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Revolut account"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">39292.32</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"bought"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">230302</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC day to day"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.302992</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"denomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>&quot;blockchainId&quot;: &quot;5409ab60f51112d2652f136d15a37db1d3257c979e6091db4c4f1a9e2c9c0272&quot;,</p>
-<h1 id='assets'>Assets</h1>
+</span></code></pre><h1 id='assets'>Assets</h1>
 <p>All of the asset types that we carry and their latest quoted best price from a supplier, and the most recently Inves quoted price for that asset.</p>
 <h1 id='supplier-prices'>Supplier prices</h1>
 <p>The historical price data of all assets that we store from various suppliers who supply our cryptocurrency assets.</p>
