@@ -151,7 +151,7 @@ api.users.get(12345678)
 ```
 
 ```shell
-curl "http://inves.technology/users/2"
+curl "http://inves.technology/users/212345678"
   -H "Authorization: mypersonalapikey"
 ```
 
@@ -469,10 +469,10 @@ let users = api.transactions.get();
       "name": "Chloe Coetzee"
     },
     "type": "purchase",
-    "state": "processed", // Could be "instructed", "quoted", "rejected", "failed"
+    "state": "processed", // Could be instructed, quoted, rejected, failed
     "dateCreated": "2012-04-23T18:25:43.511Z",
     "dateProcessed": "2012-04-23T18:25:44.511Z",
-    "source": "Lettuce iOS app", // Could be "Automatic rebalancing"
+    "source": "Lettuce iOS app", // Could be Automatic rebalancing
     "fromCurrency": "BTC",
     "toCurrency": "ETH",
     "sold": {
@@ -539,7 +539,7 @@ let users = api.transactions.get();
       "name": "Chloe Coetzee"
     },
     "type": "withdrawal",
-    "state": "processed", // Could be "instructed", "quoted", "rejected", "failed"
+    "state": "processed", // Could be instructed, quoted, rejected, failed
     "dateCreated": "2012-04-23T18:25:43.511Z",
     "dateProcessed": "2012-04-23T18:25:44.511Z",
     "source": "Lettuce iOS app",
@@ -581,6 +581,71 @@ Parameter | Default | Description
 only_processed | false | If set to true, only transactions with a processed state will be returned
 
 ## Get a Specific Transaction
+
+```ruby
+require 'appia'
+
+api = Appia::APIClient.authorize!('mypersonalapikey')
+api.transactions.get(12345678)
+```
+
+```python
+import appia
+
+api = appia.authorize('mypersonalapikey')
+api.transactions.get(12345678)
+```
+
+```shell
+curl "http://inves.technology/transactions/12345678"
+  -H "Authorization: mypersonalapikey"
+```
+
+```javascript
+const appia = require('appia');
+
+let api = appia.authorize('mypersonalapikey');
+let max = api.transactions.get(12345678);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 12345678,
+  "user": {
+    "id": 10239201,
+    "name": "Chloe Coetzee"
+  },
+  "type": "purchase",
+  "state": "processed",
+  "dateCreated": "2012-04-23T18:25:43.511Z",
+  "dateProcessed": "2012-04-23T18:25:44.511Z",
+  "source": "Automatic rebalance",
+  "fromCurrency": "BTC",
+  "toCurrency": "ETH",
+  "sold": {
+    "debitOrCredit": "debit",
+    "amount": 0.203920992,
+    "denomination": "BTC"
+  },
+  "bought": {
+    "debitOrCredit": "credit",
+    "amount": 3.302992,
+    "denomination": "ETH",
+  },
+  "fees": {
+    "debitOrCredit": "debit",
+    "amount": 0.0004,
+    "denomination": "BTC",
+  },
+  "trade": {
+    "id": 10239201
+  }
+},
+```
+
+This endpoint retrieves a specific transaction.
 
 ### HTTP Request
 
