@@ -12,3 +12,7 @@ Make sure you're on the Master branch
 Make changes in source/index.html.md
 Then cd to the root and run ./deploy.sh
 This will output static HTML, CSS and Javascript on the gh-pages branch
+
+## To do
+
+Set up kiff docker containers and a development server script [like these okes.](https://github.com/cashlink/apidoc)
