@@ -419,7 +419,7 @@ USER_ID | The ID of the user to delete
 
 # Transactions
 
-Transactions are created either from an instruction from a user (e.g. through contributions or withdrawals), or are incurred automatically through fees or rebalancing. 
+Transactions are created either from an instruction from a user (e.g. through contributions or withdrawals), or are incurred automatically through fees or rebalancing.
 
 Most transactions recorded in our system are likely to be transfers between one currency type and another. More traditional send and receive transactions need to be supported too, though.
 
@@ -1090,7 +1090,7 @@ let users = api.suppliers.get();
 
 # Prices
 
-The historical price data of all assets that we store from various suppliers who supply our cryptocurrency assets, and the prices that Inves has quoted for cryptocurrencies on that day. 
+The historical price data of all assets that we store from various suppliers who supply our cryptocurrency assets, and the prices that Inves has quoted for cryptocurrencies on that day.
 
 _I'm assuming that we will run this script at midnight every day rather than keeping up to the minute/hour prices. Or add a lastUpdated field also for quick querying of a semi-current price?_
 
