@@ -657,9 +657,135 @@ Parameter | Description
 --------- | -----------
 ID | The ID of the transaction to retrieve
 
+## Get all transations belonging to one user
+
+```ruby
+require 'appia'
+
+api = Appia::APIClient.authorize!('mypersonalapikey')
+api.transactions.get.user.id(12345678)
+```
+
+```python
+import appia
+
+api = appia.authorize('mypersonalapikey')
+api.transactions.get.user.id(12345678)
+```
+
+```shell
+curl "http://inves.technology/transactions/user/id/12345678"
+  -H "Authorization: mypersonalapikey"
+```
+
+```javascript
+const appia = require('appia');
+
+let api = appia.authorize('mypersonalapikey');
+let max = api.transactions.get.user.id(12345678);
+```
+
+This endpoint retrieves all transactions belonging to a particular user.
+
+### HTTP Request
+
+`GET http://inves.technology/transactions/user/id/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the user
+
 # User balances
 
-Accounts per currency type
+The historical and current balance of each user, for each asset type that they hold with Inves. These balances are calculated at midnight for each user and stored historically. Today's balance is stored temporarily in this database if it's requested by a front-end, but it is over-written at midnight.
+
+```ruby
+require 'appia'
+
+api = Appia::APIClient.authorize!('mypersonalapikey')
+api.user_balances.get
+```
+
+```python
+import appia
+
+api = appia.authorize('mypersonalapikey')
+api.user_balances.get()
+```
+
+```shell
+curl "http://example.com/api/user_balances"
+  -H "Authorization: mypersonalapikey"
+```
+
+```javascript
+const appia = require('appia');
+
+let api = appia.authorize('mypersonalapikey');
+let users = api.user_balances.get();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "user": {
+      "id": 12345678,
+      "name": "Sam Beckbessinger"
+    },
+    "day": "20180812",
+    "baseDenomination": "GBP",
+    "total": {
+      "amount": 39293.29,
+      "denomination": "GBP"
+    },
+    "balances": [
+      {
+        "asset": "BTC",
+        "amount": 1.30,
+        "value": 29293.23 // The value on that day in the baseDenomination GBP
+      },
+      {
+        "asset": "ETH",
+        "amount": 23.23,
+        "value": 3923.23
+      }
+    ]
+  },
+  {
+    "user": {
+      "id": 12345678,
+      "name": "Simon Dingle"
+    },
+    "day": "20180812",
+    "baseDenomination": "GBP",
+    "total": {
+      "amount": 2339293.29,
+      "denomination": "GBP"
+    },
+    "balances": [
+      {
+        "asset": "BTC",
+        "amount": 10.30,
+        "value": 239293.23 // The value on that day in the baseDenomination GBP
+      },
+      {
+        "asset": "ETH",
+        "amount": 123.23,
+        "value": 39423.23
+      }
+    ]
+  }
+]
+```
+
+# Accounts
+
+The real accounts where different assets are stored. This could also be called "Value Stores". In future, we could allow users to link accounts, also. 
+
 Cards you load will have an account ID
 External bank accounts you load will have an account ID
 "type": "internal" or "linked"
@@ -678,9 +804,86 @@ External bank accounts you load will have an account ID
     "dateProcessed": "2012-04-23T18:25:44.511Z"
   },
 
-# Value stores
+```ruby
+require 'appia'
 
-The real accounts where different assets are stored. This database could also be called "Inves Accounts".
+api = Appia::APIClient.authorize!('mypersonalapikey')
+api.user_balances.get
+```
+
+```python
+import appia
+
+api = appia.authorize('mypersonalapikey')
+api.user_balances.get()
+```
+
+```shell
+curl "http://example.com/api/user_balances"
+  -H "Authorization: mypersonalapikey"
+```
+
+```javascript
+const appia = require('appia');
+
+let api = appia.authorize('mypersonalapikey');
+let users = api.user_balances.get();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "user": {
+      "id": 12345678,
+      "name": "Sam Beckbessinger"
+    },
+    "day": "20180812",
+    "baseDenomination": "GBP",
+    "total": {
+      "amount": 39293.29,
+      "denomination": "GBP"
+    },
+    "balances": [
+      {
+        "asset": "BTC",
+        "amount": 1.30,
+        "value": 29293.23 // The value on that day in the baseDenomination GBP
+      },
+      {
+        "asset": "ETH",
+        "amount": 23.23,
+        "value": 3923.23
+      }
+    ]
+  },
+  {
+    "user": {
+      "id": 12345678,
+      "name": "Simon Dingle"
+    },
+    "day": "20180812",
+    "baseDenomination": "GBP",
+    "total": {
+      "amount": 2339293.29,
+      "denomination": "GBP"
+    },
+    "balances": [
+      {
+        "asset": "BTC",
+        "amount": 10.30,
+        "value": 239293.23 // The value on that day in the baseDenomination GBP
+      },
+      {
+        "asset": "ETH",
+        "amount": 123.23,
+        "value": 39423.23
+      }
+    ]
+  }
+]
+```
 
 # Trades
 
