@@ -459,7 +459,6 @@ let users = api.transactions.get();
 > The above command returns JSON structured like this:
 
 ```json
-
 [
   // A user buys ETH using BTC using the Lettuce iOS app
   {
@@ -612,118 +611,42 @@ let max = api.transactions.get(12345678);
 
 ```json
 [
-  // Inves exchanges BTC for IOTA on behalf of a user on Binance
   {
-    "id": 10239201,
-    "type": "crypto for crypto",
-    "state": "processed", // Could be instructed, quoted, rejected, failed
+    "id": 12345678,
+    "user": {
+      "id": 10239201,
+      "name": "Chloe Coetzee"
+    },
+    "type": "purchase",
+    "state": "processed",
     "dateCreated": "2012-04-23T18:25:43.511Z",
     "dateProcessed": "2012-04-23T18:25:44.511Z",
-    "supplier": {
-      "id": 123423, // Links to the suppliers database
-      "name": "Binance",
-    },
+    "source": "Automatic rebalance",
     "fromCurrency": "BTC",
-    "toCurrency": "IOT",
+    "toCurrency": "ETH",
     "sold": {
       "debitOrCredit": "debit",
-      "account": {
-        "id": 230302,
-        "nickname": "Binance BTC hotwallet"
-      },
       "amount": 0.203920992,
       "denomination": "BTC"
     },
     "bought": {
       "debitOrCredit": "credit",
-      "account": {
-        "id": 230302,
-        "nickname": "IOTA vault"
-      },
       "amount": 3.302992,
-      "denomination": "IOT",
+      "denomination": "ETH",
     },
     "fees": {
       "debitOrCredit": "debit",
       "amount": 0.0004,
       "denomination": "BTC",
     }, // Would fees not just be built into our quoted price?
-    "transaction": {
-      "id": 10239201 // If there is a related user Transaction, this links to the Transactions database
-    }
-  },
-  // Inves tops up our BTC float
-  {
-    "id": 10239201,
-    "type": "inter crypto transfer",
-    "state": "processed", // Could be instructed, quoted, rejected, failed
-    "source": "float rules",
-    "dateCreated": "2012-04-23T18:25:43.511Z",
-    "dateProcessed": "2012-04-23T18:25:44.511Z",
-    "fromCurrency": "BTC",
-    "toCurrency": "BTC",
-    "sold": {
-      "debitOrCredit": "debit",
-      "account": {
-        "id": 230302,
-        "nickname": "BTC vault"
-      },
-      "amount": 0.203920992,
-      "denomination": "BTC"
-    },
-    "bought": {
-      "debitOrCredit": "credit",
-      "account": {
-        "id": 230302,
-        "nickname": "BTC hotwallet Binance"
-      },
-      "amount": 3.302992,
-      "denomination": "BTC",
-    },
-    "fees": {
-      "debitOrCredit": "debit",
-      "amount": 0.0004,
-      "denomination": "BTC",
-    },
-    "blockhainId": "e81b7ee809ac5319a54203c1740c686028bfa0612fa22a53c4e6c1f5e7c9e332"
-  },
-  // Inves buys more Bitcoin for GBP
-  {
-    "id": 10239201,
-    "type": "fiat for crypto",
-    "state": "processed", // Could be instructed, quoted, rejected, failed
-    "source": "admin",
-    "supplier": {
-      "id": 123423, // Links to the suppliers database
-      "name": "Cumberland",
-    },
-    "dateCreated": "2012-04-23T18:25:43.511Z",
-    "dateProcessed": "2012-04-23T18:25:44.511Z",
-    "fromCurrency": "GBP",
-    "toCurrency": "BTC",
-    "sold": {
-      "debitOrCredit": "debit",
-      "account": {
-        "id": 230302,
-        "nickname": "Revolut account"
-      },
-      "amount": 39292.32,
-      "denomination": "GBP"
-    },
-    "bought": {
-      "debitOrCredit": "credit",
-      "account": {
-        "id": 230302,
-        "nickname": "BTC day to day"
-      },
-      "amount": 3.302992,
-      "denomination": "BTC",
+    "trade": {
+      "id": 10239201 // If there is a related Trade, this links to the Trades database
     }
   }
 ]
 ```
 
-This endpoint retrieves a specific trade.
+This endpoint retrieves a specific transaction.
 
 ### HTTP Request
 
@@ -874,8 +797,6 @@ let users = api.accounts.get();
     "amount": 3.23,
     "value": 3.23 // Will usually equal on a BTC denominated account
   }
-    ]
-  }
 ]
 ```
 
@@ -913,28 +834,116 @@ let users = api.trades.get();
 
 ```json
 [
+  // Inves exchanges BTC for IOTA on behalf of a user on Binance
   {
-    "id": 12345678,
-    "nickname": "ETH vault",
-    "address": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
-    "asset": "ETH",
-    "amount": 203020202.23,
-    "value": 23030302023.30 // Today's BTC value
+    "id": 10239201,
+    "type": "crypto for crypto",
+    "state": "processed", // Could be instructed, quoted, rejected, failed
+    "dateCreated": "2012-04-23T18:25:43.511Z",
+    "dateProcessed": "2012-04-23T18:25:44.511Z",
+    "supplier": {
+      "id": 123423, // Links to the suppliers database
+      "name": "Binance",
+    },
+    "fromCurrency": "BTC",
+    "toCurrency": "IOT",
+    "sold": {
+      "debitOrCredit": "debit",
+      "account": {
+        "id": 230302,
+        "nickname": "Binance BTC hotwallet"
+      },
+      "amount": 0.203920992,
+      "denomination": "BTC"
+    },
+    "bought": {
+      "debitOrCredit": "credit",
+      "account": {
+        "id": 230302,
+        "nickname": "IOTA vault"
+      },
+      "amount": 3.302992,
+      "denomination": "IOT",
+    },
+    "fees": {
+      "debitOrCredit": "debit",
+      "amount": 0.0004,
+      "denomination": "BTC",
+    }, // Would fees not just be built into our quoted price?
+    "transaction": {
+      "id": 10239201 // If there is a related user Transaction, this links to the Transactions database
+    }
   },
+  // Inves tops up our BTC float
   {
-    "id": 12345679,
-    "nickname": "Binance hotwallet",
-    "address": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
-    "asset": "BTC",
-    "amount": 3.23,
-    "value": 3.23 // Will usually equal on a BTC denominated account
-  }
-    ]
+    "id": 10239201,
+    "type": "inter crypto transfer",
+    "state": "processed", // Could be instructed, quoted, rejected, failed
+    "source": "float rules",
+    "dateCreated": "2012-04-23T18:25:43.511Z",
+    "dateProcessed": "2012-04-23T18:25:44.511Z",
+    "fromCurrency": "BTC",
+    "toCurrency": "BTC",
+    "sold": {
+      "debitOrCredit": "debit",
+      "account": {
+        "id": 230302,
+        "nickname": "BTC vault"
+      },
+      "amount": 0.203920992,
+      "denomination": "BTC"
+    },
+    "bought": {
+      "debitOrCredit": "credit",
+      "account": {
+        "id": 230302,
+        "nickname": "BTC hotwallet Binance"
+      },
+      "amount": 3.302992,
+      "denomination": "BTC",
+    },
+    "fees": {
+      "debitOrCredit": "debit",
+      "amount": 0.0004,
+      "denomination": "BTC",
+    },
+    "blockhainId": "e81b7ee809ac5319a54203c1740c686028bfa0612fa22a53c4e6c1f5e7c9e332"
+  },
+  // Inves buys more Bitcoin for GBP
+  {
+    "id": 10239201,
+    "type": "fiat for crypto",
+    "state": "processed", // Could be instructed, quoted, rejected, failed
+    "source": "admin",
+    "supplier": {
+      "id": 123423, // Links to the suppliers database
+      "name": "Cumberland",
+    },
+    "dateCreated": "2012-04-23T18:25:43.511Z",
+    "dateProcessed": "2012-04-23T18:25:44.511Z",
+    "fromCurrency": "GBP",
+    "toCurrency": "BTC",
+    "sold": {
+      "debitOrCredit": "debit",
+      "account": {
+        "id": 230302,
+        "nickname": "Revolut account"
+      },
+      "amount": 39292.32,
+      "denomination": "GBP"
+    },
+    "bought": {
+      "debitOrCredit": "credit",
+      "account": {
+        "id": 230302,
+        "nickname": "BTC day to day"
+      },
+      "amount": 3.302992,
+      "denomination": "BTC",
+    }
   }
 ]
 ```
-
-"blockchainId": "5409ab60f51112d2652f136d15a37db1d3257c979e6091db4c4f1a9e2c9c0272",
 
 # Assets
 
