@@ -665,7 +665,6 @@ External bank accounts you load will have an account ID
 "type": "internal" or "linked"
 "denomination": "ZAR", "BTC", "ETH" etc.
 
-
       "account": {
         "id": 230392929,
         "description": "Luno wallet",
