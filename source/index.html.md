@@ -1020,6 +1020,74 @@ let users = api.assets.get();
 ]
 ```
 
+# Suppliers
+
+All of the places where Inves Technology buys cryptocurrency assets from, like Binance or Cumberland.
+
+```ruby
+require 'appia'
+
+api = Appia::APIClient.authorize!('mypersonalapikey')
+api.suppliers.get
+```
+
+```python
+import appia
+
+api = appia.authorize('mypersonalapikey')
+api.suppliers.get()
+```
+
+```shell
+curl "http://example.com/api/suppliers"
+  -H "Authorization: mypersonalapikey"
+```
+
+```javascript
+const appia = require('appia');
+
+let api = appia.authorize('mypersonalapikey');
+let users = api.suppliers.get();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 12345678,
+    "name": "Binance",
+    "address": "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    "available": [
+      {
+        "sellAsset": "BTC",
+        "buyAsset": "ETH",
+        "feePercent": 0.05,
+        "minimumTrade": 0.01
+      },
+      {
+        "sellAsset": "BTC",
+        "buyAsset": "BCH",
+        "feePercent": 0.05,
+        "minimumTrade": 0.01
+      }
+    ],
+    "withdrawalFees": {
+      "amount": 0.05,
+      "denomination": "BTC"
+    },
+    "withdrawalLimit": {
+      "amount": 100000,
+      "denomination": "BTC",
+      "hours": 24
+    }
+  },
+  {
+  // A second supplier
+  }
+]
+```
+
 # Supplier prices
 
 The historical price data of all assets that we store from various suppliers who supply our cryptocurrency assets.
@@ -1027,10 +1095,6 @@ The historical price data of all assets that we store from various suppliers who
 # Inves prices
 
 The historical prices Inves has set for each asset.
-
-# Suppliers
-
-All of the places where Inves Technology buys cryptocurrency assets from, like Binance or Cumberland.
 
 # Events
 
