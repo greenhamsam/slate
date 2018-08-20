@@ -611,91 +611,128 @@ let max = api.transactions.get(12345678);
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 12345678,
-  "user": {
+[
+  // Inves exchanges BTC for IOTA on behalf of a user on Binance
+  {
     "id": 10239201,
-    "name": "Chloe Coetzee"
+    "type": "crypto for crypto",
+    "state": "processed", // Could be instructed, quoted, rejected, failed
+    "dateCreated": "2012-04-23T18:25:43.511Z",
+    "dateProcessed": "2012-04-23T18:25:44.511Z",
+    "supplier": {
+      "id": 123423, // Links to the suppliers database
+      "name": "Binance",
+    },
+    "fromCurrency": "BTC",
+    "toCurrency": "IOT",
+    "sold": {
+      "debitOrCredit": "debit",
+      "account": {
+        "id": 230302,
+        "nickname": "Binance BTC hotwallet"
+      },
+      "amount": 0.203920992,
+      "denomination": "BTC"
+    },
+    "bought": {
+      "debitOrCredit": "credit",
+      "account": {
+        "id": 230302,
+        "nickname": "IOTA vault"
+      },
+      "amount": 3.302992,
+      "denomination": "IOT",
+    },
+    "fees": {
+      "debitOrCredit": "debit",
+      "amount": 0.0004,
+      "denomination": "BTC",
+    }, // Would fees not just be built into our quoted price?
+    "transaction": {
+      "id": 10239201 // If there is a related user Transaction, this links to the Transactions database
+    }
   },
-  "type": "purchase",
-  "state": "processed",
-  "dateCreated": "2012-04-23T18:25:43.511Z",
-  "dateProcessed": "2012-04-23T18:25:44.511Z",
-  "source": "Automatic rebalance",
-  "fromCurrency": "BTC",
-  "toCurrency": "ETH",
-  "sold": {
-    "debitOrCredit": "debit",
-    "amount": 0.203920992,
-    "denomination": "BTC"
+  // Inves tops up our BTC float
+  {
+    "id": 10239201,
+    "type": "inter crypto transfer",
+    "state": "processed", // Could be instructed, quoted, rejected, failed
+    "source": "float rules",
+    "dateCreated": "2012-04-23T18:25:43.511Z",
+    "dateProcessed": "2012-04-23T18:25:44.511Z",
+    "fromCurrency": "BTC",
+    "toCurrency": "BTC",
+    "sold": {
+      "debitOrCredit": "debit",
+      "account": {
+        "id": 230302,
+        "nickname": "BTC vault"
+      },
+      "amount": 0.203920992,
+      "denomination": "BTC"
+    },
+    "bought": {
+      "debitOrCredit": "credit",
+      "account": {
+        "id": 230302,
+        "nickname": "BTC hotwallet Binance"
+      },
+      "amount": 3.302992,
+      "denomination": "BTC",
+    },
+    "fees": {
+      "debitOrCredit": "debit",
+      "amount": 0.0004,
+      "denomination": "BTC",
+    },
+    "blockhainId": "e81b7ee809ac5319a54203c1740c686028bfa0612fa22a53c4e6c1f5e7c9e332"
   },
-  "bought": {
-    "debitOrCredit": "credit",
-    "amount": 3.302992,
-    "denomination": "ETH",
-  },
-  "fees": {
-    "debitOrCredit": "debit",
-    "amount": 0.0004,
-    "denomination": "BTC",
-  },
-  "trade": {
-    "id": 10239201
+  // Inves buys more Bitcoin for GBP
+  {
+    "id": 10239201,
+    "type": "fiat for crypto",
+    "state": "processed", // Could be instructed, quoted, rejected, failed
+    "source": "admin",
+    "supplier": {
+      "id": 123423, // Links to the suppliers database
+      "name": "Cumberland",
+    },
+    "dateCreated": "2012-04-23T18:25:43.511Z",
+    "dateProcessed": "2012-04-23T18:25:44.511Z",
+    "fromCurrency": "GBP",
+    "toCurrency": "BTC",
+    "sold": {
+      "debitOrCredit": "debit",
+      "account": {
+        "id": 230302,
+        "nickname": "Revolut account"
+      },
+      "amount": 39292.32,
+      "denomination": "GBP"
+    },
+    "bought": {
+      "debitOrCredit": "credit",
+      "account": {
+        "id": 230302,
+        "nickname": "BTC day to day"
+      },
+      "amount": 3.302992,
+      "denomination": "BTC",
+    }
   }
-},
-```
+]
 
-This endpoint retrieves a specific transaction.
+This endpoint retrieves a specific trade.
 
 ### HTTP Request
 
-`GET http://inves.technology/transactions/<ID>`
+`GET http://inves.technology/trades/<ID>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the transaction to retrieve
-
-## Get all transations belonging to one user
-
-```ruby
-require 'appia'
-
-api = Appia::APIClient.authorize!('mypersonalapikey')
-api.transactions.get.user.id(12345678)
-```
-
-```python
-import appia
-
-api = appia.authorize('mypersonalapikey')
-api.transactions.get.user.id(12345678)
-```
-
-```shell
-curl "http://inves.technology/transactions/user/id/12345678"
-  -H "Authorization: mypersonalapikey"
-```
-
-```javascript
-const appia = require('appia');
-
-let api = appia.authorize('mypersonalapikey');
-let max = api.transactions.get.user.id(12345678);
-```
-
-This endpoint retrieves all transactions belonging to a particular user.
-
-### HTTP Request
-
-`GET http://inves.technology/transactions/user/id/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the user
+ID | The ID of the trade to retrieve
 
 # User balances
 
@@ -732,6 +769,7 @@ let users = api.user_balances.get();
 ```json
 [
   {
+    "id": 12345678, // Can we rather use User-Date as the primary key?
     "user": {
       "id": 12345678,
       "name": "Sam Beckbessinger"
@@ -756,6 +794,7 @@ let users = api.user_balances.get();
     ]
   },
   {
+    "id": 12345678,
     "user": {
       "id": 12345678,
       "name": "Simon Dingle"
@@ -784,42 +823,26 @@ let users = api.user_balances.get();
 
 # Accounts
 
-The real accounts where different assets are stored. This could also be called "Value Stores". In future, we could allow users to link accounts, also. 
+The real accounts where different assets are stored. This could also be called "Value Stores". In future, we could allow users to link accounts, also.
 
-Cards you load will have an account ID
-External bank accounts you load will have an account ID
-"type": "internal" or "linked"
-"denomination": "ZAR", "BTC", "ETH" etc.
-
-      "account": {
-        "id": 230392929,
-        "description": "Luno wallet",
-        "status": "verified",
-        "type": "external crypto",
-        "denomination": "BTC",
-        "address": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT"
-      }
-    "blockchainId": "5409ab60f51112d2652f136d15a37db1d3257c979e6091db4c4f1a9e2c9c0272",
-    "dateCreated": "2012-04-23T18:25:43.511Z",
-    "dateProcessed": "2012-04-23T18:25:44.511Z"
-  },
+_Is there any purpose in us storing historical account balances?_
 
 ```ruby
 require 'appia'
 
 api = Appia::APIClient.authorize!('mypersonalapikey')
-api.user_balances.get
+api.accounts.get
 ```
 
 ```python
 import appia
 
 api = appia.authorize('mypersonalapikey')
-api.user_balances.get()
+api.accounts.get()
 ```
 
 ```shell
-curl "http://example.com/api/user_balances"
+curl "http://example.com/api/accounts"
   -H "Authorization: mypersonalapikey"
 ```
 
@@ -827,7 +850,7 @@ curl "http://example.com/api/user_balances"
 const appia = require('appia');
 
 let api = appia.authorize('mypersonalapikey');
-let users = api.user_balances.get();
+let users = api.accounts.get();
 ```
 
 > The above command returns JSON structured like this:
@@ -835,51 +858,21 @@ let users = api.user_balances.get();
 ```json
 [
   {
-    "user": {
-      "id": 12345678,
-      "name": "Sam Beckbessinger"
-    },
-    "day": "20180812",
-    "baseDenomination": "GBP",
-    "total": {
-      "amount": 39293.29,
-      "denomination": "GBP"
-    },
-    "balances": [
-      {
-        "asset": "BTC",
-        "amount": 1.30,
-        "value": 29293.23 // The value on that day in the baseDenomination GBP
-      },
-      {
-        "asset": "ETH",
-        "amount": 23.23,
-        "value": 3923.23
-      }
-    ]
+    "id": 12345678,
+    "nickname": "ETH vault",
+    "address": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
+    "asset": "ETH",
+    "amount": 203020202.23,
+    "value": 23030302023.30 // Today's BTC value
   },
   {
-    "user": {
-      "id": 12345678,
-      "name": "Simon Dingle"
-    },
-    "day": "20180812",
-    "baseDenomination": "GBP",
-    "total": {
-      "amount": 2339293.29,
-      "denomination": "GBP"
-    },
-    "balances": [
-      {
-        "asset": "BTC",
-        "amount": 10.30,
-        "value": 239293.23 // The value on that day in the baseDenomination GBP
-      },
-      {
-        "asset": "ETH",
-        "amount": 123.23,
-        "value": 39423.23
-      }
+    "id": 12345679,
+    "nickname": "Binance hotwallet",
+    "address": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
+    "asset": "BTC",
+    "amount": 3.23,
+    "value": 3.23 // Will usually equal on a BTC denominated account
+  }
     ]
   }
 ]
@@ -888,6 +881,59 @@ let users = api.user_balances.get();
 # Trades
 
 All of the inter-asset trades that Inves makes on our Supplier platforms. These change the real underlying assets in our value store accounts. Trades are also where we move money between different value store accounts. This database could also be called "Inves Transactions".
+
+```ruby
+require 'appia'
+
+api = Appia::APIClient.authorize!('mypersonalapikey')
+api.trades.get
+```
+
+```python
+import appia
+
+api = appia.authorize('mypersonalapikey')
+api.trades.get()
+```
+
+```shell
+curl "http://example.com/api/trades"
+  -H "Authorization: mypersonalapikey"
+```
+
+```javascript
+const appia = require('appia');
+
+let api = appia.authorize('mypersonalapikey');
+let users = api.trades.get();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 12345678,
+    "nickname": "ETH vault",
+    "address": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
+    "asset": "ETH",
+    "amount": 203020202.23,
+    "value": 23030302023.30 // Today's BTC value
+  },
+  {
+    "id": 12345679,
+    "nickname": "Binance hotwallet",
+    "address": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
+    "asset": "BTC",
+    "amount": 3.23,
+    "value": 3.23 // Will usually equal on a BTC denominated account
+  }
+    ]
+  }
+]
+```
+
+"blockchainId": "5409ab60f51112d2652f136d15a37db1d3257c979e6091db4c4f1a9e2c9c0272",
 
 # Assets
 
