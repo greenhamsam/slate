@@ -24,6 +24,33 @@ We have language bindings in Shell, Ruby, Python, and JavaScript. BOOM. You can 
 
 Oh by the way, Simon Dingle has an extremely silly face. 😜
 
+# Important Definitions
+
+Some important definitions that exist within our world.
+
+## Account
+
+An account has a balance that is the sum of transactions. A balance is a record of the current **state** of the account. An account can only have type of asset inside it. That asset could be a currency, cryptocurrency, units of a fund, value of a house, or many other things. You cannot have a single account that is made up of two different currencies - as far as our system is concerned, those are two different accounts. It might, however, be helpful to sometimes group similar accounts for our users.
+
+All balances are made up of a **quantity** of a **type of asset** that has a **current price** in the user's **base currency**. For instance:
+- I have an account with Luno, and I own 10 ETH and 2 Bitcoins on that platform. I like to see everything converted back to South African Rands (this is my base currency). The price of BTC at this moment is R 90,000 and the price of ETH is R 2 000. Appia sees this as me having two accounts:
+  1. A Luno (**institution**) ETH (**asset type**) account with a **quantity** of 10 at a **current price** in my **base currency** of R 2 000. The **balance** of my account is therefore R 20 000.
+  2. A Luno (**institution**) BTC (**asset type**) account with a **quantity** of 2 at a **current price** in my **base currency** of R 90 000. The **balance** of my account is therefore R 180 000.
+- I also have a share portfolio through EasyEquities. I own 15 shares in the S&P 500 that are worth R 100 each, and 3 shares of Netflix that are worth R 50 each. IF I am able to scrape all of this data with Appia, then Appia will see this as 2 accounts:
+  1. A EasyEquities (**institution**) S&P 500 (**asset type**) account with a **quantity** of 15 at a **current price** in my **base currency** of R 100. The **balance** of my account is therefore R 1 500.
+  2. A EasyEquities (**institution**) Netflix (**asset type**) account with a **quantity** of 3 at a **current price** in my **base currency** of R 50. The **balance** of my account is therefore R 150.
+
+However, I may not be able to get this level of detail back from EasyEquities. In that case, Appia might see this as one account that we don't know everything about:
+  - A EasyEquities (**institution**) international equities (**asset type**) account with a **balance** of R 1 650. 
+
+An account is **somewhere**, usually at an institution (e.g. Luno, Barclays, on a paper wallet).
+
+## Transaction
+
+Each transaction represents the **flow** of value in and out of an account.
+
+## Institution
+
 # Authentication
 
 > To authorise, use this code:
