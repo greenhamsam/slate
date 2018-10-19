@@ -802,7 +802,7 @@ let users = api.accounts.get();
 
 # Trades
 
-All of the inter-asset trades that Inves makes on our Supplier platforms. These change the real underlying assets in our value store accounts. Trades are also where we move money between different value store accounts. This database could also be called "Inves Transactions".
+All of the inter-asset trades that Inves makes on our Institution platforms. These change the real underlying assets in our value store accounts. Trades are also where we move money between different value store accounts. This database could also be called "Inves Transactions".
 
 ```ruby
 require 'appia'
@@ -841,8 +841,8 @@ let users = api.trades.get();
     "state": "processed", // Could be instructed, quoted, rejected, failed
     "dateCreated": "2012-04-23T18:25:43.511Z",
     "dateProcessed": "2012-04-23T18:25:44.511Z",
-    "supplier": {
-      "id": 123423, // Links to the suppliers database
+    "Institution": {
+      "id": 123423, // Links to the Institutions database
       "name": "Binance",
     },
     "fromCurrency": "BTC",
@@ -915,8 +915,8 @@ let users = api.trades.get();
     "type": "fiat for crypto",
     "state": "processed", // Could be instructed, quoted, rejected, failed
     "source": "admin",
-    "supplier": {
-      "id": 123423, // Links to the suppliers database
+    "Institution": {
+      "id": 123423, // Links to the Institutions database
       "name": "Cumberland",
     },
     "dateCreated": "2012-04-23T18:25:43.511Z",
@@ -947,7 +947,7 @@ let users = api.trades.get();
 
 # Assets
 
-All of the asset types that we carry and their latest quoted best price from a supplier, and the most recently Inves quoted price for that asset.
+All of the asset types that we carry and their latest quoted best price from a Institution, and the most recently Inves quoted price for that asset.
 
 ```ruby
 require 'appia'
@@ -986,7 +986,7 @@ let users = api.assets.get();
     "buy": { // The best available price we can buy this at right now (or at midnight)
       "price": 2.23,
       "denomination": "BTC",
-      "supplier": {
+      "Institution": {
         "id": 230302,
         "name": "Binance"
       },
@@ -1005,7 +1005,7 @@ let users = api.assets.get();
     "buy": {
       "price": 223023.23,
       "denomination": "USD",
-      "supplier": {
+      "Institution": {
         "id": 230302,
         "name": "Cumberland"
       },
@@ -1020,7 +1020,7 @@ let users = api.assets.get();
 ]
 ```
 
-# Suppliers
+# Institutions
 
 All of the places where Inves Technology buys cryptocurrency assets from, like Binance or Cumberland.
 
@@ -1028,18 +1028,18 @@ All of the places where Inves Technology buys cryptocurrency assets from, like B
 require 'appia'
 
 api = Appia::APIClient.authorize!('mypersonalapikey')
-api.suppliers.get
+api.Institutions.get
 ```
 
 ```python
 import appia
 
 api = appia.authorize('mypersonalapikey')
-api.suppliers.get()
+api.Institutions.get()
 ```
 
 ```shell
-curl "http://example.com/api/suppliers"
+curl "http://example.com/api/Institutions"
   -H "Authorization: mypersonalapikey"
 ```
 
@@ -1047,7 +1047,7 @@ curl "http://example.com/api/suppliers"
 const appia = require('appia');
 
 let api = appia.authorize('mypersonalapikey');
-let users = api.suppliers.get();
+let users = api.Institutions.get();
 ```
 
 > The above command returns JSON structured like this:
@@ -1083,14 +1083,14 @@ let users = api.suppliers.get();
     }
   },
   {
-  // A second supplier
+  // A second Institution
   }
 ]
 ```
 
 # Prices
 
-The historical price data of all assets that we store from various suppliers who supply our cryptocurrency assets, and the prices that Inves has quoted for cryptocurrencies on that day.
+The historical price data of all assets that we store from various Institutions who supply our cryptocurrency assets, and the prices that Inves has quoted for cryptocurrencies on that day.
 
 _I'm assuming that we will run this script at midnight every day rather than keeping up to the minute/hour prices. Or add a lastUpdated field also for quick querying of a semi-current price?_
 
@@ -1126,7 +1126,7 @@ let users = api.prices.get();
 [
   {
     "id": 12345678, // Can we rather use User-Date as the primary key?
-    "supplier": {
+    "Institution": {
       "id": 12345678,
       "name": "Binance"
     },
@@ -1145,7 +1145,7 @@ let users = api.prices.get();
   },
   {
     "id": 12345678, // Can we rather use User-Date as the primary key?
-    "supplier": {
+    "Institution": {
       "id": 000000,
       "name": "Inves"
     },
