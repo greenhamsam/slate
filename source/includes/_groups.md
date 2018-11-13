@@ -4,7 +4,7 @@ Groups are collections of users who have special defaults applied to them, for i
 
 OR
 
-Groups are organisations of people who can share portfolios by default.
+Groups are organisations of people who can share portfolios by default?
 
 Groups do not exist in our MVP.
 

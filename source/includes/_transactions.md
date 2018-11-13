@@ -19,6 +19,14 @@ Transactions go through many states which are recorded in the Events log (see be
 Transactions refer to user transactions only. They change values in the ledger but do not actually move underlying assets between accounts. The movement of real assets is referred to as a Trade, in our world.
 _(This assumes that we're going with an omnnibus accounts model. If we decide differently, we will need to redesign this.)_
 
+Notes:
+- accountId
+- debitOrCredit
+- quantityDelta
+- assetId
+- date
+- description
+
 ## Get All Transactions
 
 ```ruby
