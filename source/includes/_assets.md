@@ -1,8 +1,6 @@
 # Assets
 
-TODO
-
-All of the asset types that we carry and their latest quoted best price from a Institution, and the most recently Inves quoted price for that asset.
+A dictionary of all available assets.
 
 ```ruby
 require 'appia'
@@ -35,42 +33,10 @@ let users = api.assets.get();
 ```json
 [
   {
-    "id": 12345678,
+    "symbol": "ETH",
     "name": "Ethereum",
-    "code": "ETH",
-    "buy": { // The best available price we can buy this at right now (or at midnight)
-      "price": 2.23,
-      "denomination": "BTC",
-      "Institution": {
-        "id": 230302,
-        "name": "Binance"
-      },
-      "lastUpdated": "2012-04-23T00:00:00.000Z"
-    },
-    "sell": { // Our current price to sell this asset
-      "price": 2.3,
-      "denomination": "BTC",
-      "lastUpdated": "2012-04-23T00:00:00.000Z"
-    }
+    "assetType": "cryptocurrency",
   },
-  {
-    "id": 12345678,
-    "name": "Bitcoin",
-    "code": "BTC",
-    "buy": {
-      "price": 223023.23,
-      "denomination": "USD",
-      "Institution": {
-        "id": 230302,
-        "name": "Cumberland"
-      },
-      "lastUpdated": "2012-04-23T00:00:00.000Z"
-    },
-    "sell": {
-      "price": 223024,
-      "denomination": "GBP",
-      "lastUpdated": "2012-04-23T00:00:00.000Z"
-    }
-  }
+  // More assets //
 ]
 ```

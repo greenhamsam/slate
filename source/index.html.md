@@ -18,7 +18,6 @@ includes:
   - balances
   - events
   - prices
-  - institutions
   - assets
   - asset_types
   - errors

@@ -53,6 +53,7 @@ let accounts = api.accounts.get();
   {
     "id": 12345678,
     "where": "Ledger Nano",
+    "type": "tracked", // Can be "tracked" or "manual", in future releases, could be "linked"
     "assetSymbol": "ETH",
     "assetName": "Ethereum",
     "assetType": "cryptocurrency",
@@ -72,6 +73,7 @@ let accounts = api.accounts.get();
   {
     "id": 12345679,
     "where": null,
+    "type": "tracked", // Can be "tracked" or "manual", in future releases, could be "linked"
     "assetSymbol": "VOD.JS",
     "assetName": "Vodacom South Africa",
     "assetType": "equity",
