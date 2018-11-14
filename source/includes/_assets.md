@@ -36,6 +36,7 @@ let users = api.assets.get();
     "symbol": "ETH",
     "name": "Ethereum",
     "assetType": "cryptocurrency",
+    "displaySymbol": "Ξ",
   },
   // More assets //
 ]
