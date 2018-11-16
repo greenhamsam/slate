@@ -61,7 +61,7 @@ let accounts = api.accounts.get();
       129302,
       230199,
     ],
-    "latest_balance": {
+    "latestBalance": {
       "debitOrCredit": "debit",
       "price": 10, // In that user's base_currency
       "quantity": 2.39,
@@ -77,7 +77,7 @@ let accounts = api.accounts.get();
     "assetSymbol": "VOD.JS",
     "assetName": "Vodacom South Africa",
     "assetType": "equity",
-    "latest_balance": {
+    "latestBalance": {
       "value": 20.9, // For some accounts, we only return a value
       "currency": "ZAR",
       "time": "2012-04-23T18:25:43.511Z",
