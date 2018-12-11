@@ -2,7 +2,7 @@
 
 This API allows you to query our database. It's kiff.
 
-The live site is visible [here](https://inves-technology.github.io/slate/#introduction)
+The live site is visible [here](https://inves-technology.github.io/lettuce-docs/#introduction)
 
 This documentation was created using a nifty tool called [Slate](https://github.com/lord/slate).
 
