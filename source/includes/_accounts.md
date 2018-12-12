@@ -71,6 +71,7 @@ let accounts = api.accounts.get();
       "value": 20.9,
       "currency": "ZAR",
       "time": "2012-04-23T18:25:43.511Z",
+      "source": "Crypto Compare",
     },
   },
   {
@@ -84,6 +85,7 @@ let accounts = api.accounts.get();
       "value": 20.9, // For some accounts, we only return a value
       "currency": "ZAR",
       "time": "2012-04-23T18:25:43.511Z",
+      "source": "Alpha Vantage",
     },
   },
   {
@@ -91,12 +93,13 @@ let accounts = api.accounts.get();
     "where": "Botswana",
     "type": "manual", // Can be "tracked" or "manual", in future releases, could be "linked"
     "assetSymbol": "ZAR",
-    "assetName": "A herd of cows",
+    "assetName": "4 cows",
     "assetType": "manual",
     "latestBalance": {
       "value": 2000,
       "currency": "ZAR",
       "time": "2012-04-23T18:25:43.511Z",
+      "source": "manual",
     },
   }
 ]
