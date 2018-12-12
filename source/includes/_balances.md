@@ -1,4 +1,4 @@
-# User balances
+# Balances
 
 The historical and current balance of each user for each account, portfolio, and user overall. These balances are calculated at midnight for each user and stored historically. Today's balance is stored temporarily in this database if it's requested by a front-end, but it is over-written at midnight.
 
@@ -53,15 +53,17 @@ let balances = api.balances.get();
     ],
     "accountBalances": [
       {
+        "manual": false,
         "account": 230293,
         "asset": "BTC",
         "amount": 1.30,
         "value": 29293.23,
       },
       {
+        "manual": true,
         "account": 320323,
-        "asset": "ETH",
-        "amount": 23.23,
+        "asset": null,
+        "amount": null,
         "value": 3923.23,
       }
     ]

@@ -85,6 +85,19 @@ let accounts = api.accounts.get();
       "currency": "ZAR",
       "time": "2012-04-23T18:25:43.511Z",
     },
+  },
+  {
+    "id": 12345674,
+    "where": "Botswana",
+    "type": "manual", // Can be "tracked" or "manual", in future releases, could be "linked"
+    "assetSymbol": "ZAR",
+    "assetName": "A herd of cows",
+    "assetType": "manual",
+    "latestBalance": {
+      "value": 2000,
+      "currency": "ZAR",
+      "time": "2012-04-23T18:25:43.511Z",
+    },
   }
 ]
 ```
