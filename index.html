@@ -252,10 +252,13 @@
               </ul>
           </li>
           <li>
+            <a href="#section-one" class="toc-h1 toc-link" data-title="Section One">Section One</a>
+          </li>
+          <li>
             <a href="#accounts" class="toc-h1 toc-link" data-title="Accounts">Accounts</a>
           </li>
           <li>
-            <a href="#user-balances" class="toc-h1 toc-link" data-title="User balances">User balances</a>
+            <a href="#balances" class="toc-h1 toc-link" data-title="Balances">Balances</a>
           </li>
           <li>
             <a href="#events" class="toc-h1 toc-link" data-title="Events">Events</a>
@@ -540,7 +543,7 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves all portfolios.</p>
-<h1 id='accounts'>Accounts</h1>
+<h1 id='section-one'>Section One</h1><h1 id='accounts'>Accounts</h1>
 <p>An account has a <strong>balance</strong>. A balance is a record of the current <strong>state</strong> of the account. An account can only have one type of asset inside it. That asset could be a currency, cryptocurrency, units of a fund, value of a house, or many other things. You cannot have a single account that is made up of two different currencies - as far as our system is concerned, those are two different accounts. It might, however, be helpful to sometimes group similar accounts for our users.</p>
 
 <p>An account is <strong>somewhere</strong>, usually at an institution (e.g. Luno, Barclays) but sometimes on a paper wallet or in the deeds office (if I own a house). For consistency, our data structure will refer to all of these &quot;wheres&quot; as <strong>institutions</strong> even if it&#39;s a leather wallet in the user&#39;s backpack.</p>
@@ -578,9 +581,9 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/accounts"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">accounts</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
@@ -594,9 +597,10 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
     </span><span class="s2">"assetSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ethereum"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"assetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cryptocurrency"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"portfolios"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Optional</span><span class="p">:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">account</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">listed</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="err">portfolios</span><span class="w">
+    </span><span class="s2">"portfolios"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="err">//</span><span class="w"> </span><span class="err">Optional</span><span class="p">:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">account</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">listed</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="err">portfolios</span><span class="w">
       </span><span class="mi">129302</span><span class="p">,</span><span class="w">
-      </span><span class="mi">230199</span><span class="p">,</span><span class="w">
+      </span><span class="mi">230199</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"latestBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
@@ -605,7 +609,8 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
       </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.9</span><span class="p">,</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345679</span><span class="p">,</span><span class="w">
@@ -618,10 +623,25 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
       </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.9</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">For</span><span class="w"> </span><span class="err">some</span><span class="w"> </span><span class="err">accounts</span><span class="p">,</span><span class="w"> </span><span class="err">we</span><span class="w"> </span><span class="err">only</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">value</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alpha Vantage"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345674</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"where"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Botswana"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"tracked"</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">future</span><span class="w"> </span><span class="err">releases</span><span class="p">,</span><span class="w"> </span><span class="err">could</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"linked"</span><span class="w">
+    </span><span class="s2">"assetSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 cows"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"assetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latestBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre><h1 id='user-balances'>User balances</h1>
+</span></code></pre><h1 id='balances'>Balances</h1>
 <p>The historical and current balance of each user for each account, portfolio, and user overall. These balances are calculated at midnight for each user and stored historically. Today&#39;s balance is stored temporarily in this database if it&#39;s requested by a front-end, but it is over-written at midnight.</p>
 <pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
 
@@ -663,15 +683,17 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"accountBalances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"manual"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">230293</span><span class="p">,</span><span class="w">
         </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.30</span><span class="p">,</span><span class="w">
         </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">29293.23</span><span class="p">,</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"manual"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">320323</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">23.23</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">3923.23</span><span class="p">,</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -708,69 +730,39 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
   </span><span class="err">//</span><span class="w"> </span><span class="err">More</span><span class="w"> </span><span class="err">events</span><span class="w"> </span><span class="err">//</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h1 id='prices'>Prices</h1>
-<p>TODO</p>
+<p>Price data of a set of assets / symbols (from_symbols) in a chose currency / symbol (to_symbol), gathered through our price aggregation.</p>
 
-<p>The historical price data of all assets that we store from various Institutions who supply our cryptocurrency assets, and the prices that Inves has quoted for cryptocurrencies on that day.</p>
-
-<p><em>I&#39;m assuming that we will run this script at midnight every day rather than keeping up to the minute/hour prices. Or add a lastUpdated field also for quick querying of a semi-current price?</em></p>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Appia</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">prices</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">appia</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">appia</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'mypersonalapikey'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/prices"</span>
+<p>Currently it calls the source(s) in real-time, but soon we will start caching the answers and do scheduled refreshes</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://api.lettuce.money/prices?to_symbol=ZAR&amp;from_symbols=BTC,USD,MSFT"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">prices</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Can</span><span class="w"> </span><span class="err">we</span><span class="w"> </span><span class="err">rather</span><span class="w"> </span><span class="err">use</span><span class="w"> </span><span class="err">User-Date</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">primary</span><span class="w"> </span><span class="err">key?</span><span class="w">
-    </span><span class="s2">"Institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Binance"</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:01.001Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"toSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"fromSymbols"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:59:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.000021</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20180812"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"baseDenomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"prices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">233202.20</span><span class="p">,</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">13202.20</span><span class="p">,</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Can</span><span class="w"> </span><span class="err">we</span><span class="w"> </span><span class="err">rather</span><span class="w"> </span><span class="err">use</span><span class="w"> </span><span class="err">User-Date</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">primary</span><span class="w"> </span><span class="err">key?</span><span class="w">
-    </span><span class="s2">"Institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">000000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Inves"</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:58:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.070</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20180812"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"baseDenomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"prices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">233202.20</span><span class="p">,</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">13202.20</span><span class="p">,</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSFT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:57:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1535.01</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alpha Vantage"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre><h1 id='assets'>Assets</h1>
 <p>A dictionary of all available assets.</p>
 <pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
