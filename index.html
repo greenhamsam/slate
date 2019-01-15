@@ -227,6 +227,9 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#implemented" class="toc-h1 toc-link" data-title="Implemented">Implemented</a>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
@@ -250,9 +253,6 @@
                     <a href="#get-all-portfolios" class="toc-h2 toc-link" data-title="Get All Portfolios">Get All Portfolios</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#section-one" class="toc-h1 toc-link" data-title="Section One">Section One</a>
           </li>
           <li>
             <a href="#accounts" class="toc-h1 toc-link" data-title="Accounts">Accounts</a>
@@ -290,10 +290,13 @@
 
 <p>Oh by the way, Simon Dingle has an extremely silly face. 😜</p>
 
-<p><strong>To be discussed:</strong>
-- Should we call &quot;institutions&quot;, &quot;platforms&quot;? 
-- Should we rather just use terms like &quot;where&quot; (institution) and &quot;what&quot; (asset)?</p>
-<h1 id='authentication'>Authentication</h1>
+<p><strong>To be discussed:</strong></p>
+
+<ul>
+<li>Should we call &quot;institutions&quot;, &quot;platforms&quot;?</li>
+<li>Should we rather just use terms like &quot;where&quot; (institution) and &quot;what&quot; (asset)?</li>
+</ul>
+<h1 id='implemented'>Implemented</h1><h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorise, use this code:</p>
 </blockquote>
@@ -543,7 +546,7 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves all portfolios.</p>
-<h1 id='section-one'>Section One</h1><h1 id='accounts'>Accounts</h1>
+<h1 id='accounts'>Accounts</h1>
 <p>An account has a <strong>balance</strong>. A balance is a record of the current <strong>state</strong> of the account. An account can only have one type of asset inside it. That asset could be a currency, cryptocurrency, units of a fund, value of a house, or many other things. You cannot have a single account that is made up of two different currencies - as far as our system is concerned, those are two different accounts. It might, however, be helpful to sometimes group similar accounts for our users.</p>
 
 <p>An account is <strong>somewhere</strong>, usually at an institution (e.g. Luno, Barclays) but sometimes on a paper wallet or in the deeds office (if I own a house). For consistency, our data structure will refer to all of these &quot;wheres&quot; as <strong>institutions</strong> even if it&#39;s a leather wallet in the user&#39;s backpack.</p>
