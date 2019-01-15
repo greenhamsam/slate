@@ -1,5 +1,7 @@
 # Groups
 
+_Update 15 Jan 2019: not yet implemented_
+
 Groups are collections of users who have special defaults applied to them, for instance, they may share a portfolio strategy or be part of the same fund.
 
 OR
@@ -30,9 +32,9 @@ curl "http://example.com/api/groups"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let groups = api.groups.get();
 ```
 
@@ -43,30 +45,14 @@ let groups = api.groups.get();
   {
     "id": 12345678,
     "name": "Inves Club",
-    "members": [
-      12345678,
-      22345678,
-      32345678,
-      42345678,
-      52345678
-    ],
-    "admins": [
-      12345678,
-    ]
+    "members": [12345678, 22345678, 32345678, 42345678, 52345678],
+    "admins": [12345678]
   },
   {
     "id": 12345678,
     "name": "Lettuce",
-    "members": [
-      12345678,
-      32345678,
-      92345678,
-      11345678,
-      22345678
-    ],
-    "admins": [
-      32345678,
-    ]
+    "members": [12345678, 32345678, 92345678, 11345678, 22345678],
+    "admins": [32345678]
   }
 ]
 ```
@@ -99,9 +85,9 @@ curl "http://inves.technology/groups/members/12345678"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let max = api.groups.members.get(12345678);
 ```
 
@@ -109,13 +95,7 @@ let max = api.groups.members.get(12345678);
 
 ```json
 {
-  "members": [
-    12345678,
-    32345678,
-    92345678,
-    11345678,
-    22345678
-  ]
+  "members": [12345678, 32345678, 92345678, 11345678, 22345678]
 }
 ```
 
@@ -127,9 +107,9 @@ This endpoint retrieves members belonging to a specific group.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the group to retrieve members from
+| Parameter | Description                                  |
+| --------- | -------------------------------------------- |
+| ID        | The ID of the group to retrieve members from |
 
 ## Delete a User from a Group
 
@@ -154,9 +134,9 @@ curl "http://inves.technology/api/groups/members/22345678&32345678"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let max = api.groups.members.delete(22345678, 32345678);
 ```
 
@@ -165,7 +145,7 @@ let max = api.groups.members.delete(22345678, 32345678);
 ```json
 {
   "id": 32345678,
-  "deleted" : true
+  "deleted": true
 }
 ```
 
@@ -181,7 +161,7 @@ Always list the group ID first, then the user ID.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-GROUP_ID | The ID of the group to delete the user from
-USER_ID | The ID of the user to delete
+| Parameter | Description                                 |
+| --------- | ------------------------------------------- |
+| GROUP_ID  | The ID of the group to delete the user from |
+| USER_ID   | The ID of the user to delete                |

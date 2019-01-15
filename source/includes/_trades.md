@@ -1,5 +1,7 @@
 # Trades
 
+_Update 15 Jan 2019: not yet implemented_
+
 All of the inter-asset trades that Inves makes on our Institution platforms. These change the real underlying assets in our value store accounts. Trades are also where we move money between different value store accounts. This database could also be called "Inves Transactions".
 
 ```ruby
@@ -22,9 +24,9 @@ curl "http://example.com/api/trades"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let users = api.trades.get();
 ```
 
@@ -41,7 +43,7 @@ let users = api.trades.get();
     "dateProcessed": "2012-04-23T18:25:44.511Z",
     "Institution": {
       "id": 123423, // Links to the Institutions database
-      "name": "Binance",
+      "name": "Binance"
     },
     "fromCurrency": "BTC",
     "toCurrency": "IOT",
@@ -61,12 +63,12 @@ let users = api.trades.get();
         "nickname": "IOTA vault"
       },
       "amount": 3.302992,
-      "denomination": "IOT",
+      "denomination": "IOT"
     },
     "fees": {
       "debitOrCredit": "debit",
       "amount": 0.0004,
-      "denomination": "BTC",
+      "denomination": "BTC"
     }, // Would fees not just be built into our quoted price?
     "transaction": {
       "id": 10239201 // If there is a related user Transaction, this links to the Transactions database
@@ -98,12 +100,12 @@ let users = api.trades.get();
         "nickname": "BTC hotwallet Binance"
       },
       "amount": 3.302992,
-      "denomination": "BTC",
+      "denomination": "BTC"
     },
     "fees": {
       "debitOrCredit": "debit",
       "amount": 0.0004,
-      "denomination": "BTC",
+      "denomination": "BTC"
     },
     "blockhainId": "e81b7ee809ac5319a54203c1740c686028bfa0612fa22a53c4e6c1f5e7c9e332"
   },
@@ -115,7 +117,7 @@ let users = api.trades.get();
     "source": "admin",
     "Institution": {
       "id": 123423, // Links to the Institutions database
-      "name": "Cumberland",
+      "name": "Cumberland"
     },
     "dateCreated": "2012-04-23T18:25:43.511Z",
     "dateProcessed": "2012-04-23T18:25:44.511Z",
@@ -137,7 +139,7 @@ let users = api.trades.get();
         "nickname": "BTC day to day"
       },
       "amount": 3.302992,
-      "denomination": "BTC",
+      "denomination": "BTC"
     }
   }
 ]

@@ -1,5 +1,7 @@
 # Transactions
 
+_Update 15 Jan 2019: not yet implemented_
+
 TRANSACTIONS ARE NOT INCLUDED IN OUR MVP
 
 Each transaction represents the **flow** of value into and out of an account. A transaction effects the **quantity** of the asset held in an account rather than its **balance**. Where the quantity is not known on an account we do not derive the balance from the sum of transactions on that account.
@@ -20,6 +22,7 @@ Transactions refer to user transactions only. They change values in the ledger b
 _(This assumes that we're going with an omnnibus accounts model. If we decide differently, we will need to redesign this.)_
 
 Notes:
+
 - accountId
 - debitOrCredit
 - quantityDelta
@@ -49,9 +52,9 @@ curl "http://example.com/api/transactions"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let users = api.transactions.get();
 ```
 
@@ -81,12 +84,12 @@ let users = api.transactions.get();
     "bought": {
       "debitOrCredit": "credit",
       "amount": 3.302992,
-      "denomination": "ETH",
+      "denomination": "ETH"
     },
     "fees": {
       "debitOrCredit": "debit",
       "amount": 0.0004,
-      "denomination": "BTC",
+      "denomination": "BTC"
     }, // Would fees not just be built into our quoted price?
     "trade": {
       "id": 10239201 // If there is a related Trade, this links to the Trade database
@@ -108,12 +111,12 @@ let users = api.transactions.get();
     "bought": {
       "debitOrCredit": "credit",
       "amount": 2000.05,
-      "denomination": "GBP",
+      "denomination": "GBP"
     },
     "fees": {
       "debitOrCredit": "debit",
       "amount": 0.04,
-      "denomination": "GBP",
+      "denomination": "GBP"
     },
     "trade": {
       "id": 10239201 // There is a related incoming GBP transaction into the Inves Revolut account
@@ -150,12 +153,13 @@ let users = api.transactions.get();
     "fees": {
       "debitOrCredit": "debit",
       "amount": 0.4,
-      "denomination": "GBP",
+      "denomination": "GBP"
     }, // Would fees not just be built into our quoted price?
     "trade": {
       "id": 10239201 // There is a related outgoing GBP transaction
     },
-    "bankAccount": { // Does this rather belong under Trades? In its own database?
+    "bankAccount": {
+      // Does this rather belong under Trades? In its own database?
       "bank": "FNB",
       "branch": 2392002,
       "accountNumber": 293938393093,
@@ -174,9 +178,9 @@ This endpoint retrieves all transactions.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-only_processed | false | If set to true, only transactions with a processed state will be returned
+| Parameter      | Default | Description                                                               |
+| -------------- | ------- | ------------------------------------------------------------------------- |
+| only_processed | false   | If set to true, only transactions with a processed state will be returned |
 
 ## Get a Specific Transaction
 
@@ -200,9 +204,9 @@ curl "http://inves.technology/transactions/12345678"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let max = api.transactions.get(12345678);
 ```
 
@@ -231,12 +235,12 @@ let max = api.transactions.get(12345678);
     "bought": {
       "debitOrCredit": "credit",
       "amount": 3.302992,
-      "denomination": "ETH",
+      "denomination": "ETH"
     },
     "fees": {
       "debitOrCredit": "debit",
       "amount": 0.0004,
-      "denomination": "BTC",
+      "denomination": "BTC"
     }, // Would fees not just be built into our quoted price?
     "trade": {
       "id": 10239201 // If there is a related Trade, this links to the Trades database
@@ -253,6 +257,6 @@ This endpoint retrieves a specific transaction.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the trade to retrieve
+| Parameter | Description                     |
+| --------- | ------------------------------- |
+| ID        | The ID of the trade to retrieve |

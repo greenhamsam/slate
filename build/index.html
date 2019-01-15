@@ -230,6 +230,9 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
+            <a href="#prices" class="toc-h1 toc-link" data-title="Prices">Prices</a>
+          </li>
+          <li>
             <a href="#users" class="toc-h1 toc-link" data-title="Users">Users</a>
               <ul class="toc-list-h2">
                   <li>
@@ -255,13 +258,10 @@
             <a href="#accounts" class="toc-h1 toc-link" data-title="Accounts">Accounts</a>
           </li>
           <li>
-            <a href="#user-balances" class="toc-h1 toc-link" data-title="User balances">User balances</a>
+            <a href="#balances" class="toc-h1 toc-link" data-title="Balances">Balances</a>
           </li>
           <li>
             <a href="#events" class="toc-h1 toc-link" data-title="Events">Events</a>
-          </li>
-          <li>
-            <a href="#prices" class="toc-h1 toc-link" data-title="Prices">Prices</a>
           </li>
           <li>
             <a href="#assets" class="toc-h1 toc-link" data-title="Assets">Assets</a>
@@ -287,10 +287,15 @@
 
 <p>Oh by the way, Simon Dingle has an extremely silly face. 😜</p>
 
-<p><strong>To be discussed:</strong>
-- Should we call &quot;institutions&quot;, &quot;platforms&quot;? 
-- Should we rather just use terms like &quot;where&quot; (institution) and &quot;what&quot; (asset)?</p>
+<p><strong>To be discussed:</strong></p>
+
+<ul>
+<li>Should we call &quot;institutions&quot;, &quot;platforms&quot;?</li>
+<li>Should we rather just use terms like &quot;where&quot; (institution) and &quot;what&quot; (asset)?</li>
+</ul>
 <h1 id='authentication'>Authentication</h1>
+<p><em>Update 15 Jan 2019: not yet implemented</em></p>
+
 <blockquote>
 <p>To authorise, use this code:</p>
 </blockquote>
@@ -303,9 +308,9 @@
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 </code></pre>
 <blockquote>
 <p>Make sure to replace <code>mypersonalapikey</code> with your API key.</p>
@@ -320,12 +325,50 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 You must replace <code>mypersonalapikey</code> with your personal API key.
 </aside>
-<h1 id='users'>Users</h1>
+<h1 id='prices'>Prices</h1>
+<p><em>Update 15 Jan 2019: implemented but not saved to a database</em></p>
+
+<p>Price data of a set of assets / symbols (from_symbols) in a chose currency / symbol (to_symbol), gathered through our price aggregation.</p>
+
+<p>Currently it calls the source(s) in real-time, but soon we will start caching the answers and do scheduled refreshes</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://api.lettuce.money/prices?to_symbol=ZAR&amp;from_symbols=BTC,USD,MSFT"</span>
+  -H <span class="s2">"Authorization: mypersonalapikey"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:01.001Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"toSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"fromSymbols"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:59:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.000021</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:58:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.07</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSFT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:57:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1535.01</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alpha Vantage"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h1 id='users'>Users</h1>
+<p><em>Update 15 Jan 2019: implemented only in the front-ends</em></p>
+
 <p>We do not store any personal information about our users.</p>
 
 <p>Every user is given a unique ID when the account is created.</p>
 
-<p>In the future, users will be able to belong to groups. This is not available in our MVP, though, so set all &quot;groups&quot; to &quot;null&quot;. </p>
+<p>In the future, users will be able to belong to groups. This is not available in our MVP, though, so set all &quot;groups&quot; to &quot;null&quot;.</p>
 <h2 id='get-all-users'>Get All Users</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Appia</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">)</span>
@@ -336,9 +379,9 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/users"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
@@ -356,8 +399,8 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">203232.39</span><span class="p">,</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22345679</span><span class="p">,</span><span class="w">
@@ -370,8 +413,8 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.39</span><span class="p">,</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -402,27 +445,27 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">12345678</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://inves.technology/users/212345678"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">12345678</span><span class="p">);</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"baseCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"baseCurrencySymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"lastActivity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"latestBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">203232.39</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"baseCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"baseCurrencySymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"lastActivity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"latestBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">203232.39</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves a specific user.</p>
@@ -451,9 +494,9 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://inves.technology/api/users/12345678"</span>
   -X DELETE
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">12345678</span><span class="p">);</span>
 </code></pre>
 <blockquote>
@@ -461,7 +504,7 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint deletes a specific user.</p>
@@ -480,13 +523,18 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 </tr>
 </tbody></table>
 <h1 id='portfolios'>Portfolios</h1>
-<p>A user can have multiple portfolios. A portfolio is a collection of accounts. By defualt, every user has 1 portfolio called &quot;My Moneh&quot;. </p>
+<p><em>Update 15 Jan 2019: not yet implemented</em></p>
+
+<p>A user can have multiple portfolios. A portfolio is a collection of accounts. By defualt, every user has 1 portfolio called &quot;My Moneh&quot;.</p>
 
 <p>Users can add up to 3 portfolios on the free tier, and can add up to 100 portfolios on the paid tier (TBC).</p>
 
-<p>NOTE:
-- Should be able to retrieve all portfolios for a single user.
-- In the future, a portfolio could belong to a group.</p>
+<p>NOTE:</p>
+
+<ul>
+<li>Should be able to retrieve all portfolios for a single user.</li>
+<li>In the future, a portfolio could belong to a group.</li>
+</ul>
 <h2 id='get-all-portfolios'>Get All Portfolios</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Appia</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">)</span>
@@ -497,9 +545,9 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">portfolios</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/portfolios"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">portfolios</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">portfolios</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
@@ -510,37 +558,32 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Moneh"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="mi">2392392</span><span class="p">,</span><span class="w">
-      </span><span class="mi">2301938</span><span class="p">,</span><span class="w">
-      </span><span class="mi">2938218</span><span class="p">,</span><span class="w">
-    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">2392392</span><span class="p">,</span><span class="w"> </span><span class="mi">2301938</span><span class="p">,</span><span class="w"> </span><span class="mi">2938218</span><span class="p">],</span><span class="w">
     </span><span class="s2">"latestBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.39</span><span class="p">,</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345679</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Genesis Mining Income"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="mi">2392393</span><span class="p">,</span><span class="w">
-      </span><span class="mi">2301938</span><span class="p">,</span><span class="w">
-    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">2392393</span><span class="p">,</span><span class="w"> </span><span class="mi">2301938</span><span class="p">],</span><span class="w">
     </span><span class="s2">"latestBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.39</span><span class="p">,</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves all portfolios.</p>
 <h1 id='accounts'>Accounts</h1>
+<p><em>Update 15 Jan 2019: implemented on the front-ends only</em></p>
+
 <p>An account has a <strong>balance</strong>. A balance is a record of the current <strong>state</strong> of the account. An account can only have one type of asset inside it. That asset could be a currency, cryptocurrency, units of a fund, value of a house, or many other things. You cannot have a single account that is made up of two different currencies - as far as our system is concerned, those are two different accounts. It might, however, be helpful to sometimes group similar accounts for our users.</p>
 
 <p>An account is <strong>somewhere</strong>, usually at an institution (e.g. Luno, Barclays) but sometimes on a paper wallet or in the deeds office (if I own a house). For consistency, our data structure will refer to all of these &quot;wheres&quot; as <strong>institutions</strong> even if it&#39;s a leather wallet in the user&#39;s backpack.</p>
@@ -578,9 +621,9 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/accounts"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">accounts</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
@@ -594,9 +637,10 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
     </span><span class="s2">"assetSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ethereum"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"assetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cryptocurrency"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"portfolios"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Optional</span><span class="p">:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">account</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">listed</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="err">portfolios</span><span class="w">
+    </span><span class="s2">"portfolios"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="err">//</span><span class="w"> </span><span class="err">Optional</span><span class="p">:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">account</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">listed</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="err">portfolios</span><span class="w">
       </span><span class="mi">129302</span><span class="p">,</span><span class="w">
-      </span><span class="mi">230199</span><span class="p">,</span><span class="w">
+      </span><span class="mi">230199</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"latestBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"debitOrCredit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
@@ -605,7 +649,8 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
       </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.9</span><span class="p">,</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345679</span><span class="p">,</span><span class="w">
@@ -618,10 +663,27 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
       </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.9</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">For</span><span class="w"> </span><span class="err">some</span><span class="w"> </span><span class="err">accounts</span><span class="p">,</span><span class="w"> </span><span class="err">we</span><span class="w"> </span><span class="err">only</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">value</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alpha Vantage"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345674</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"where"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Botswana"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"tracked"</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">future</span><span class="w"> </span><span class="err">releases</span><span class="p">,</span><span class="w"> </span><span class="err">could</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"linked"</span><span class="w">
+    </span><span class="s2">"assetSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 cows"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"assetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latestBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre><h1 id='user-balances'>User balances</h1>
+</span></code></pre><h1 id='balances'>Balances</h1>
+<p><em>Update 15 Jan 2019: not yet implemented</em></p>
+
 <p>The historical and current balance of each user for each account, portfolio, and user overall. These balances are calculated at midnight for each user and stored historically. Today&#39;s balance is stored temporarily in this database if it&#39;s requested by a front-end, but it is over-written at midnight.</p>
 <pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
 
@@ -633,9 +695,9 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">balances</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/balances"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">balances</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">balances</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
@@ -654,30 +716,34 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
     </span><span class="s2">"portfolioBalances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="s2">"portfolio"</span><span class="p">:</span><span class="w"> </span><span class="mi">230293</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">239.23</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">239.23</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="s2">"portfolio"</span><span class="p">:</span><span class="w"> </span><span class="mi">330293</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-2939.29</span><span class="p">,</span><span class="w">
-      </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-2939.29</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"accountBalances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"manual"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">230293</span><span class="p">,</span><span class="w">
         </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.30</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">29293.23</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">29293.23</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"manual"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">320323</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">23.23</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">3923.23</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">3923.23</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h1 id='events'>Events</h1>
+<p><em>Update 15 Jan 2019: not yet implemented</em></p>
+
 <p>A log of all of the events that change the values of any account in the system. What occured, at what time, for what user. These events are things like: a transaction or trade was initiated, processed, rejected, failed or reversed. A new account was created or deleted.</p>
 <pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
 
@@ -689,89 +755,26 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/events"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">events</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New account linked"</span><span class="p">,</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="err">//</span><span class="w"> </span><span class="err">More</span><span class="w"> </span><span class="err">events</span><span class="w"> </span><span class="err">//</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre><h1 id='prices'>Prices</h1>
-<p>TODO</p>
-
-<p>The historical price data of all assets that we store from various Institutions who supply our cryptocurrency assets, and the prices that Inves has quoted for cryptocurrencies on that day.</p>
-
-<p><em>I&#39;m assuming that we will run this script at midnight every day rather than keeping up to the minute/hour prices. Or add a lastUpdated field also for quick querying of a semi-current price?</em></p>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Appia</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">prices</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">appia</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">appia</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'mypersonalapikey'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/prices"</span>
-  -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">prices</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Can</span><span class="w"> </span><span class="err">we</span><span class="w"> </span><span class="err">rather</span><span class="w"> </span><span class="err">use</span><span class="w"> </span><span class="err">User-Date</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">primary</span><span class="w"> </span><span class="err">key?</span><span class="w">
-    </span><span class="s2">"Institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Binance"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20180812"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"baseDenomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"prices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">233202.20</span><span class="p">,</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">13202.20</span><span class="p">,</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Can</span><span class="w"> </span><span class="err">we</span><span class="w"> </span><span class="err">rather</span><span class="w"> </span><span class="err">use</span><span class="w"> </span><span class="err">User-Date</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">primary</span><span class="w"> </span><span class="err">key?</span><span class="w">
-    </span><span class="s2">"Institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">000000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Inves"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20180812"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"baseDenomination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"prices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">233202.20</span><span class="p">,</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">13202.20</span><span class="p">,</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-04-23T18:25:43.511Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New account linked"</span><span class="w">
   </span><span class="p">}</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">More</span><span class="w"> </span><span class="err">events</span><span class="w"> </span><span class="err">//</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h1 id='assets'>Assets</h1>
+<p><em>Update 15 Jan 2019: not yet implemented</em></p>
+
 <p>A dictionary of all available assets.</p>
 <pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
 
@@ -783,9 +786,9 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/assets"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">assets</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
@@ -797,11 +800,13 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ethereum"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"assetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cryptocurrency"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"displaySymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ξ"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
   </span><span class="err">//</span><span class="w"> </span><span class="err">More</span><span class="w"> </span><span class="err">assets</span><span class="w"> </span><span class="err">//</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h1 id='asset-types'>Asset Types</h1>
+<p><em>Update 15 Jan 2019: not yet implemented</em></p>
+
 <p>A dictionary of all available asset types, and arrays of the asset symbols included in that type.</p>
 <pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
 
@@ -813,9 +818,9 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <span class="n">api</span><span class="o">.</span><span class="n">assetTypes</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/assetTypes"</span>
   -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'appia'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">appia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"appia"</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'mypersonalapikey'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">appia</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s2">"mypersonalapikey"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">assetTypes</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">assetTypes</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 <blockquote>
@@ -824,15 +829,13 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"assetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cryptocurrency"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"assets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"LTC"</span><span class="p">,</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"assets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LTC"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
   </span><span class="err">//</span><span class="w"> </span><span class="err">More</span><span class="w"> </span><span class="err">asset</span><span class="w"> </span><span class="err">types</span><span class="w"> </span><span class="err">//</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h1 id='errors'>Errors</h1>
+<p><em>Update 15 Jan 2019: not yet implemented</em></p>
+
 <p>The Appia API uses the following error codes:</p>
 
 <table><thead>

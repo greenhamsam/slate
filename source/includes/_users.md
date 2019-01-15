@@ -1,10 +1,12 @@
 # Users
 
+_Update 15 Jan 2019: implemented only in the front-ends_
+
 We do not store any personal information about our users.
 
 Every user is given a unique ID when the account is created.
 
-In the future, users will be able to belong to groups. This is not available in our MVP, though, so set all "groups" to "null". 
+In the future, users will be able to belong to groups. This is not available in our MVP, though, so set all "groups" to "null".
 
 ## Get All Users
 
@@ -28,9 +30,9 @@ curl "http://example.com/api/users"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let users = api.users.get();
 ```
 
@@ -49,8 +51,8 @@ let users = api.users.get();
       "amount": 203232.39,
       "debitOrCredit": "debit",
       "currency": "ZAR",
-      "time": "2012-04-23T18:25:43.511Z",
-    },
+      "time": "2012-04-23T18:25:43.511Z"
+    }
   },
   {
     "id": 22345679,
@@ -63,8 +65,8 @@ let users = api.users.get();
       "amount": 2.39,
       "debitOrCredit": "debit",
       "currency": "BTC",
-      "time": "2012-04-23T18:25:43.511Z",
-    },
+      "time": "2012-04-23T18:25:43.511Z"
+    }
   }
 ]
 ```
@@ -77,9 +79,9 @@ This endpoint retrieves all users.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_deleted | false | If set to true, the result will also include deleted users.
+| Parameter       | Default | Description                                                 |
+| --------------- | ------- | ----------------------------------------------------------- |
+| include_deleted | false   | If set to true, the result will also include deleted users. |
 
 ## Get a Specific User
 
@@ -103,9 +105,9 @@ curl "http://inves.technology/users/212345678"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let max = api.users.get(12345678);
 ```
 
@@ -113,18 +115,18 @@ let max = api.users.get(12345678);
 
 ```json
 {
-    "id": 12345678,
-    "groups": null,
-    "deleted": false,
-    "baseCurrency": "ZAR",
-    "baseCurrencySymbol": "R",
-    "lastActivity": "2012-04-23T18:25:43.511Z",
-    "latestBalance": {
-      "amount": 203232.39,
-      "debitOrCredit": "debit",
-      "currency": "ZAR",
-      "time": "2012-04-23T18:25:43.511Z",
-    },
+  "id": 12345678,
+  "groups": null,
+  "deleted": false,
+  "baseCurrency": "ZAR",
+  "baseCurrencySymbol": "R",
+  "lastActivity": "2012-04-23T18:25:43.511Z",
+  "latestBalance": {
+    "amount": 203232.39,
+    "debitOrCredit": "debit",
+    "currency": "ZAR",
+    "time": "2012-04-23T18:25:43.511Z"
+  }
 }
 ```
 
@@ -136,9 +138,9 @@ This endpoint retrieves a specific user.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the user to retrieve
+| Parameter | Description                    |
+| --------- | ------------------------------ |
+| ID        | The ID of the user to retrieve |
 
 ## Delete a Specific User
 
@@ -163,9 +165,9 @@ curl "http://inves.technology/api/users/12345678"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let max = api.users.delete(12345678);
 ```
 
@@ -174,7 +176,7 @@ let max = api.users.delete(12345678);
 ```json
 {
   "id": 12345678,
-  "deleted" : true
+  "deleted": true
 }
 ```
 
@@ -186,6 +188,6 @@ This endpoint deletes a specific user.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the user to delete
+| Parameter | Description                  |
+| --------- | ---------------------------- |
+| ID        | The ID of the user to delete |

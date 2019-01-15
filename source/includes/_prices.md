@@ -1,5 +1,7 @@
 # Prices
 
+_Update 15 Jan 2019: implemented but not saved to a database_
+
 Price data of a set of assets / symbols (from_symbols) in a chose currency / symbol (to_symbol), gathered through our price aggregation.
 
 Currently it calls the source(s) in real-time, but soon we will start caching the answers and do scheduled refreshes
@@ -25,7 +27,7 @@ curl "http://api.lettuce.money/prices?to_symbol=ZAR&from_symbols=BTC,USD,MSFT"
     {
       "fromSymbol": "USD",
       "lastUpdated": "2018-12-31T11:58:01.001Z",
-      "price": 0.070,
+      "price": 0.07,
       "source": "Crypto Compare"
     },
     {
@@ -33,7 +35,7 @@ curl "http://api.lettuce.money/prices?to_symbol=ZAR&from_symbols=BTC,USD,MSFT"
       "last_updated": "2018-12-31T11:57:01.001Z",
       "price": 1535.01,
       "source": "Alpha Vantage"
-    },
+    }
   ]
 }
 ```

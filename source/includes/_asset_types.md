@@ -1,5 +1,7 @@
 # Asset Types
 
+_Update 15 Jan 2019: not yet implemented_
+
 A dictionary of all available asset types, and arrays of the asset symbols included in that type.
 
 ```ruby
@@ -22,9 +24,9 @@ curl "http://example.com/api/assetTypes"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let assetTypes = api.assetTypes.get();
 ```
 
@@ -34,12 +36,8 @@ let assetTypes = api.assetTypes.get();
 [
   {
     "assetType": "cryptocurrency",
-    "assets": [
-      "ETH",
-      "BTC",
-      "LTC",
-    ]
-  },
+    "assets": ["ETH", "BTC", "LTC"]
+  }
   // More asset types //
 ]
 ```

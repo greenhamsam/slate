@@ -1,5 +1,7 @@
 # Institutions
 
+_Update 15 Jan 2019: not yet implemented_
+
 Available in a later release, when users can link accounts.
 
 All of the places where Inves Technology buys cryptocurrency assets from, like Binance or Cumberland.
@@ -26,9 +28,9 @@ curl "http://example.com/api/Institutions"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let users = api.Institutions.get();
 ```
 
@@ -65,7 +67,7 @@ let users = api.Institutions.get();
     }
   },
   {
-  // A second Institution
+    // A second Institution
   }
 ]
 ```

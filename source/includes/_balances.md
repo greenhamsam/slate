@@ -1,5 +1,7 @@
 # Balances
 
+_Update 15 Jan 2019: not yet implemented_
+
 The historical and current balance of each user for each account, portfolio, and user overall. These balances are calculated at midnight for each user and stored historically. Today's balance is stored temporarily in this database if it's requested by a front-end, but it is over-written at midnight.
 
 ```ruby
@@ -22,9 +24,9 @@ curl "http://example.com/api/balances"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let balances = api.balances.get();
 ```
 
@@ -44,29 +46,29 @@ let balances = api.balances.get();
     "portfolioBalances": [
       {
         "portfolio": 230293,
-        "value": 239.23,
+        "value": 239.23
       },
       {
         "portfolio": 330293,
-        "value": -2939.29,
-      },
+        "value": -2939.29
+      }
     ],
     "accountBalances": [
       {
         "manual": false,
         "account": 230293,
         "asset": "BTC",
-        "amount": 1.30,
-        "value": 29293.23,
+        "amount": 1.3,
+        "value": 29293.23
       },
       {
         "manual": true,
         "account": 320323,
         "asset": null,
         "amount": null,
-        "value": 3923.23,
+        "value": 3923.23
       }
     ]
-  },
+  }
 ]
 ```

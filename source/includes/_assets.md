@@ -1,5 +1,7 @@
 # Assets
 
+_Update 15 Jan 2019: not yet implemented_
+
 A dictionary of all available assets.
 
 ```ruby
@@ -22,9 +24,9 @@ curl "http://example.com/api/assets"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 let users = api.assets.get();
 ```
 
@@ -37,8 +39,8 @@ let users = api.assets.get();
     "name": "Ethereum",
     "assetType": "cryptocurrency",
     "displaySymbol": "Ξ",
-    "region": "United States",
-  },
+    "region": "United States"
+  }
   // More assets //
 ]
 ```

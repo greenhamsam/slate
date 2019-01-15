@@ -1,5 +1,7 @@
 # Authentication
 
+_Update 15 Jan 2019: not yet implemented_
+
 > To authorise, use this code:
 
 ```ruby
@@ -21,9 +23,9 @@ curl "api_endpoint_here"
 ```
 
 ```javascript
-const appia = require('appia');
+const appia = require("appia");
 
-let api = appia.authorize('mypersonalapikey');
+let api = appia.authorize("mypersonalapikey");
 ```
 
 > Make sure to replace `mypersonalapikey` with your API key.

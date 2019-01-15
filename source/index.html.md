@@ -12,12 +12,12 @@ toc_footers:
 
 includes:
   - authentication
+  - prices
   - users
   - portfolios
   - accounts
   - balances
   - events
-  - prices
   - assets
   - asset_types
   - errors
@@ -34,5 +34,6 @@ We have language bindings in Shell, Ruby, Python, and JavaScript. BOOM. You can 
 Oh by the way, Simon Dingle has an extremely silly face. 😜
 
 **To be discussed:**
-- Should we call "institutions", "platforms"? 
+
+- Should we call "institutions", "platforms"?
 - Should we rather just use terms like "where" (institution) and "what" (asset)?
