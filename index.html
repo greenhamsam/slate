@@ -233,7 +233,10 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#not-yet-implemented" class="toc-h1 toc-link" data-title="not-yet-implemented">not-yet-implemented</a>
+            <a href="#prices" class="toc-h1 toc-link" data-title="Prices">Prices</a>
+          </li>
+          <li>
+            <a href="#future" class="toc-h1 toc-link" data-title="Future">Future</a>
           </li>
           <li>
             <a href="#users" class="toc-h1 toc-link" data-title="Users">Users</a>
@@ -265,9 +268,6 @@
           </li>
           <li>
             <a href="#events" class="toc-h1 toc-link" data-title="Events">Events</a>
-          </li>
-          <li>
-            <a href="#prices" class="toc-h1 toc-link" data-title="Prices">Prices</a>
           </li>
           <li>
             <a href="#assets" class="toc-h1 toc-link" data-title="Assets">Assets</a>
@@ -329,7 +329,41 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 You must replace <code>mypersonalapikey</code> with your personal API key.
 </aside>
-<h1 id='not-yet-implemented'>not-yet-implemented</h1><h1 id='users'>Users</h1>
+<h1 id='prices'>Prices</h1>
+<p>Price data of a set of assets / symbols (from_symbols) in a chose currency / symbol (to_symbol), gathered through our price aggregation.</p>
+
+<p>Currently it calls the source(s) in real-time, but soon we will start caching the answers and do scheduled refreshes</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://api.lettuce.money/prices?to_symbol=ZAR&amp;from_symbols=BTC,USD,MSFT"</span>
+  -H <span class="s2">"Authorization: mypersonalapikey"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:01.001Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"toSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"fromSymbols"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:59:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.000021</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:58:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.070</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSFT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:57:01.001Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1535.01</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alpha Vantage"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h1 id='future'>Future</h1><h1 id='users'>Users</h1>
 <p>We do not store any personal information about our users.</p>
 
 <p>Every user is given a unique ID when the account is created.</p>
@@ -735,40 +769,6 @@ You must replace <code>mypersonalapikey</code> with your personal API key.
   </span><span class="p">},</span><span class="w">
   </span><span class="err">//</span><span class="w"> </span><span class="err">More</span><span class="w"> </span><span class="err">events</span><span class="w"> </span><span class="err">//</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre><h1 id='prices'>Prices</h1>
-<p>Price data of a set of assets / symbols (from_symbols) in a chose currency / symbol (to_symbol), gathered through our price aggregation.</p>
-
-<p>Currently it calls the source(s) in real-time, but soon we will start caching the answers and do scheduled refreshes</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://api.lettuce.money/prices?to_symbol=ZAR&amp;from_symbols=BTC,USD,MSFT"</span>
-  -H <span class="s2">"Authorization: mypersonalapikey"</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:01.001Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"toSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fromSymbols"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:59:01.001Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.000021</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:58:01.001Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.070</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crypto Compare"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"fromSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSFT"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-31T11:57:01.001Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1535.01</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alpha Vantage"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
 </span></code></pre><h1 id='assets'>Assets</h1>
 <p>A dictionary of all available assets.</p>
 <pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'appia'</span>
