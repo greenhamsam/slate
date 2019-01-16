@@ -1,13 +1,15 @@
 # Prices
 
-_Update 15 Jan 2019: implemented but not saved to a database_
-
-Price data of a set of assets / symbols (from_symbols) in a chose currency / symbol (to_symbol), gathered through our price aggregation.
+_Update 16 Jan 2019: implemented but not saved to a database_
 
 Currently it calls the source(s) in real-time, but soon we will start caching the answers and do scheduled refreshes
 
+## Cryptocurrencies
+
+Price data of a set of cryptocurrency symbols (symbols) in a chose currency / symbol (toSymbol), gathered through our price aggregation.
+
 ```shell
-curl "http://api.lettuce.money/prices?to_symbol=ZAR&from_symbols=BTC,USD,MSFT"
+curl "http://api.lettuce.money/pricing/cryptos?toSymbol=ZAR&symbols=BTC,ETH,XMR"
   -H "Authorization: mypersonalapikey"
 ```
 
@@ -20,22 +22,128 @@ curl "http://api.lettuce.money/prices?to_symbol=ZAR&from_symbols=BTC,USD,MSFT"
   "fromSymbols": [
     {
       "fromSymbol": "BTC",
-      "lastUpdated": "2018-12-31T11:59:01.001Z",
-      "price": 0.000021,
-      "source": "Crypto Compare"
+      "price": 53504.54788657036,
+      "source": "cryptocompare"
     },
     {
-      "fromSymbol": "USD",
-      "lastUpdated": "2018-12-31T11:58:01.001Z",
-      "price": 0.07,
-      "source": "Crypto Compare"
+      "fromSymbol":"ETH",
+      "price":1841.2815319462345,
+      "source":"cryptocompare"
     },
     {
-      "fromSymbol": "MSFT",
-      "last_updated": "2018-12-31T11:57:01.001Z",
-      "price": 1535.01,
-      "source": "Alpha Vantage"
+      "fromSymbol":"XMR",
+      "price":667.5567423230975,
+      "source":"cryptocompare"
     }
-  ]
+  ],
+  "errors": []
+}
+```
+
+## Stocks
+
+Price data of a set of stocks symbols (symbols) in a chose currency / symbol (toSymbol), gathered through our price aggregation.
+
+```shell
+curl "http://api.lettuce.money/pricing/stocks?toSymbol=ZAR&symbols=MSFT,TWTR,VOD.JO"
+  -H "Authorization: mypersonalapikey"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "timestamp": "2019-01-01T00:00:01.001Z",
+  "toSymbol": "ZAR",
+  "fromSymbols": [
+    {
+      "fromSymbol":"MSFT",
+      "price":1532.7689388410452,
+      "source":"alphavantage"
+    },
+    {
+      "fromSymbol":"TWTR",
+      "price":481.9734345351044,
+      "source":"alphavantage"
+    },
+    {
+      "fromSymbol":"VOD.JO",
+      "price":13399.0000,
+      "source":"alphavantage"
+    }
+  ],
+  "errors": []
+}
+```
+
+## Forex
+
+Price data of a set of forex symbols (symbols) in a chose currency / symbol (toSymbol), gathered through our price aggregation.
+
+```shell
+curl "http://api.lettuce.money/pricing/forex?toSymbol=ZAR&symbols=EUR,GBP,USD"
+  -H "Authorization: mypersonalapikey"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "timestamp": "2019-01-01T00:00:01.001Z",
+  "toSymbol": "ZAR",
+  "fromSymbols": [
+    {
+      "fromSymbol":"EUR",
+      "price":16.730801405387318,
+      "source":"cryptocompare"
+    },
+    {
+      "fromSymbol":"GBP",
+      "price":18.85369532428356,
+      "source":"cryptocompare"
+    },
+    {
+      "fromSymbol":"USD",
+      "price":14.63057790782736,
+      "source":"cryptocompare"
+    }
+  ],
+  "errors": []
+}
+```
+
+## Forex
+
+Price data of a set of portfolio symbols (symbols) in a chose currency / symbol (toSymbol), gathered through our price aggregation.
+
+```shell
+curl "http://api.lettuce.money/pricing/portfolio?toSymbol=ZAR&symbols=BTC,USD,MSFT"
+  -H "Authorization: mypersonalapikey"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "timestamp": "2019-01-01T00:00:01.001Z",
+  "toSymbol": "ZAR",
+  "fromSymbols": [
+    {
+      "fromSymbol":"BTC",
+      "price":53676.86527106817,
+      "source":"cryptocompare"
+    },
+    {
+      "fromSymbol":"USD",
+      "price":14.626298083954952,
+      "source":"cryptocompare"
+    },
+    {
+      "fromSymbol":"MSFT",
+      "price":1535.9075617961096,
+      "source":"alphavantage"
+    }
+  ],
+  "errors": []
 }
 ```
