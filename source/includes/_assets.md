@@ -39,7 +39,19 @@ let users = api.assets.get();
     "name": "Ethereum",
     "assetType": "cryptocurrency",
     "displaySymbol": "Ξ",
-    "region": "United States"
+    "region": "United States",
+    "pricingProviders": [
+      {
+        "pricingProvider": "Alphavantage",
+        "rank": 1,
+        "providerSymbol": "ETH"
+      },
+      {
+        "pricingProvider": "Cryptocompare",
+        "rank": 2,
+        "providerSymbol": "ETH"
+      }
+    ]
   }
   // More assets //
 ]
