@@ -20,17 +20,20 @@ curl "http://localhost:4000/prices?toSymbol=ZAR&fromSymbols=BTC,USD,MSFT"
     {
       "fromSymbol": "BTC",
       "price": 53676.86527106817,
-      "source": "cryptocompare"
+      "source": "cryptocompare",
+      "lastUpdated": "2019-01-01T00:00:02.001Z"
     },
     {
       "fromSymbol": "USD",
       "price": 14.626298083954952,
-      "source": "cryptocompare"
+      "source": "cryptocompare",
+      "lastUpdated": "2019-01-01T00:00:02.001Z"
     },
     {
       "fromSymbol": "MSFT",
       "price": 1535.9075617961096,
-      "source": "alphavantage"
+      "source": "alphavantage",
+      "lastUpdated": "2019-01-01T00:00:02.001Z"
     }
   ],
   "errors": []
@@ -39,9 +42,9 @@ curl "http://localhost:4000/prices?toSymbol=ZAR&fromSymbols=BTC,USD,MSFT"
 
 Error response for a non-existing symbol.
 
-````shell
+```shell
 curl "http://localhost:4000/prices?toSymbol=ZAR&fromSymbols=BANANA"
-
+```
 > The above command returns JSON structured like this:
 
 ```json
@@ -56,4 +59,4 @@ curl "http://localhost:4000/prices?toSymbol=ZAR&fromSymbols=BANANA"
     }
   ]
 }
-````
+```
