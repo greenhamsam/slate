@@ -7,7 +7,7 @@ Currently it calls the source(s) in real-time, but soon we will start caching th
 Price data of a single or set of symbols (fromSymbols) in a chose currency / symbol (toSymbol), gathered through our price aggregation.
 
 ```shell
-curl "http://localhost:4000/prices?toSymbol=ZAR&fromSymbols=BTC,USD,MSFT"
+curl "http://localhost:4000/prices?toSymbol=ZAR.NONE.CC&fromSymbols=BTC.NONE.CC,USD.NONE.CC,MSFT.NYSE.EOD"
 ```
 
 > The above command returns JSON structured like this:
@@ -32,7 +32,7 @@ curl "http://localhost:4000/prices?toSymbol=ZAR&fromSymbols=BTC,USD,MSFT"
     {
       "fromSymbol": "MSFT",
       "price": 1535.9075617961096,
-      "source": "alphavantage",
+      "source": "EODHistorical",
       "lastUpdated": "2019-01-01T00:00:02.001Z"
     }
   ],
